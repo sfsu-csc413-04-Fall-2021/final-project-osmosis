@@ -1,10 +1,10 @@
 package dao;
 
-import dto.BasePaymentDto;
+import dto.BaseDto;
 
 import java.util.List;
 
-public interface BaseDao<P extends BasePaymentDto> {
+public interface BaseDao<P extends BaseDto> {
 
     public void put(P p);
 

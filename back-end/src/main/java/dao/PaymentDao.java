@@ -42,12 +42,7 @@ public class PaymentDao implements BaseDao<BasePaymentDto> {
   @Override
   public BasePaymentDto get(String id) {
     Document doc = collection.find(eq("_id",id)).first();
-    if(doc.get("type").equals("cash")) {
-      return CashPayment.fromDocument(doc);
-    } else if(doc.get("type").equals("credit")) {
-      return CreditCardPayment.fromDocument(doc);
-    }
-    return null;
+    return BasePaymentDto.toDto(doc);
   }
 
   @Override
@@ -60,11 +55,7 @@ public class PaymentDao implements BaseDao<BasePaymentDto> {
     iterable.into(docs);
     System.out.println(docs);
     for(Document doc:docs) {
-      if(doc.get("type").equals("cash")) {
-        all.add(CashPayment.fromDocument(doc));
-      } else if(doc.get("type").equals("credit")) {
-        all.add(CreditCardPayment.fromDocument(doc));
-      }
+      all.add(BasePaymentDto.toDto(doc));
       System.out.println(doc);
     }
     return all;

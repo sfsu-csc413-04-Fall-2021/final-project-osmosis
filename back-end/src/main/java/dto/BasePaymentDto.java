@@ -3,7 +3,7 @@ package dto;
 import com.google.gson.Gson;
 import org.bson.Document;
 
-public abstract class BasePaymentDto {
+public abstract class BasePaymentDto implements BaseDto {
 
     private String uniqueId;
     public Double amount;
