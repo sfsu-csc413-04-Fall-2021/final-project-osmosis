@@ -45,5 +45,9 @@ public class SparkDemo {
       var result = new SignUpResultDto(true, null);
       return gson.toJson(result);
     });
+
+    post("/api/log-in", (req,res) -> {
+      return gson.toJson(result);
+    });
   }
 }
