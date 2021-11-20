@@ -2,9 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import dao.UserDao;
-import dto.BaseUserDto;
-import dto.BasicUser;
-import dto.UserToUserTransaction;
+import dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,15 +95,98 @@ public class SparkDirectory {
             return gson.toJson(result);
         });
 
+        post("/api/log-out", (req,res) -> { //TODO
+            var result = new SignUpResultDto(true, null);
+            return gson.toJson(result);
+        });
+
         post("/api/pay", (req,res) -> {
             String body = req.body();
             SignUpResultDto result = new SignUpResultDto(true, null);
             UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
 
+            //TODO check if valid sender, recipient
             //TODO check if enough funds
             //TODO if not ask for bank
+            //TODO add to TransactionDao
 
             return gson.toJson(result);
         });
+
+        post("/api/request", (req,res) -> {
+            String body = req.body();
+            SignUpResultDto result = new SignUpResultDto(true, null);
+            RequestTransaction payment = gson.fromJson(body, RequestTransaction.class);
+
+            //TODO check if valid sender, recipient
+            //TODO add to TransactionDao
+
+            return gson.toJson(result);
+        });
+
+        post("/api/accept", (req,res) -> {
+            String body = req.body();
+            SignUpResultDto result = new SignUpResultDto(true, null);
+            RequestTransaction payment = gson.fromJson(body, RequestTransaction.class);
+
+            //TODO check if request exists
+            //TODO create new UserToUserTransaction
+            //TODO check if valid sender, recipient
+            //TODO check if enough funds
+            //TODO if not ask for bank
+            //TODO add to TransactionDao
+            //TODO remove RequestTransaction from TransactionDao
+
+            return gson.toJson(result);
+        });
+
+        post("/api/comment", (req,res) -> {
+            String body = req.body();
+            SignUpResultDto result = new SignUpResultDto(true, null);
+            CommentDto comment = gson.fromJson(body, CommentDto.class);
+
+            //TODO check if comment is valid length
+            //TODO add to CommentDao
+
+            return gson.toJson(result);
+        });
+
+        get("/api/view-all", (req,res) -> { //TODO view all public transactions and logged-in user's private transactions
+            String body = req.body();
+            SignUpResultDto result = new SignUpResultDto(true, null);
+            CommentDto comment = gson.fromJson(body, CommentDto.class);
+
+            return gson.toJson(result);
+        });
+
+        get("/api/view-transaction", (req,res) -> { //TODO view particular transaction
+            String body = req.body();
+            SignUpResultDto result = new SignUpResultDto(true, null);
+            CommentDto comment = gson.fromJson(body, CommentDto.class);
+
+            //TODO check if public or logged-in user's private transaction
+            //TODO display sender, recipient, amount (if user's), note, comments
+
+            return gson.toJson(result);
+        });
+
+        post("/api/set-privacy", (req,res) -> { //TODO set privacy of transaction, only for userToUser
+            var result = new SignUpResultDto(true, null);
+            return gson.toJson(result);
+        });
+
+        post("/api/delete-comment", (req,res) -> { //TODO
+            var result = new SignUpResultDto(true, null);
+            return gson.toJson(result);
+        });
+
+        get("/api/view-user", (req,res) -> { //TODO view all user's public transactions, if logged-in user, show private
+            String body = req.body();
+            SignUpResultDto result = new SignUpResultDto(true, null);
+            CommentDto comment = gson.fromJson(body, CommentDto.class);
+
+            return gson.toJson(result);
+        });
+
     }
 }

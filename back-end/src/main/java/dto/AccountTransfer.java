@@ -6,7 +6,8 @@ public class AccountTransfer extends BaseTransactionDto {
 
     private String userId;
     private String accountId;
-    private static String type = "accountTransfer";
+    private static String type = "transfer";
+    private static String privacy = "private";
 
     public AccountTransfer(Double amount, String to, String from, String note, String time) {
         super();
@@ -30,8 +31,8 @@ public class AccountTransfer extends BaseTransactionDto {
         return doc;
     }
 
-    public static UserToUserTransaction fromDocument(Document document){
-        return new UserToUserTransaction((Double)document.get("amount"),
+    public static AccountTransfer fromDocument(Document document){
+        return new AccountTransfer((Double)document.get("amount"),
                 (String) document.get("recipient"),
                 (String) document.get("sender"),
                 (String) document.get("note"),

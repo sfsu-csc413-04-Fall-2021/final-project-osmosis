@@ -7,14 +7,16 @@ public class UserToUserTransaction extends BaseTransactionDto {
   private String recipientId;
   private String senderId;
   private static String type = "userToUser";
+  private String privacy;
 
-  public UserToUserTransaction(Double amount, String to, String from, String note, String time) {
+  public UserToUserTransaction(Double amount, String to, String from, String note, String time, String privacy) {
     super();
     this.amount = amount;
     recipientId = to;
     senderId = from;
     this.note = note;
     timeStamp = time;
+    this.privacy = privacy;
   }
 
   @Override
@@ -26,6 +28,7 @@ public class UserToUserTransaction extends BaseTransactionDto {
             .append("fk_sender", senderId)
             .append("note", note)
             .append("completed", timeStamp)
+            .append("privacy", privacy)
             .append("_id", getUniqueId());
     return doc;
   }
@@ -35,7 +38,8 @@ public class UserToUserTransaction extends BaseTransactionDto {
             (String) document.get("recipient"),
             (String) document.get("sender"),
             (String) document.get("note"),
-            (String) document.get("completed"));
+            (String) document.get("completed"),
+            (String) document.get("privacy"));
   }
 
   public String getRecipient() {
