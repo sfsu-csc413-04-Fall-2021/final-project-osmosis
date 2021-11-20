@@ -9,6 +9,4 @@ public interface BaseDto {
     public String getUniqueId();
 
     public Document toDocument();
-
-    public BaseDto toDto();
 }

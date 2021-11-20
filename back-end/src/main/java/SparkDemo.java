@@ -47,7 +47,7 @@ public class SparkDemo {
     });
 
     post("/api/log-in", (req,res) -> {
-      return gson.toJson(result);
+      return gson.toJson(res);
     });
   }
 }

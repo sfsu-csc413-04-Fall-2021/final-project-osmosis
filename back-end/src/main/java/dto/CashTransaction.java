@@ -2,19 +2,19 @@ package dto;
 
 import org.bson.Document;
 
-public class CashPayment extends BasePaymentDto {
+public class CashTransaction extends BaseTransactionDto {
 
   private String type = "cash";
 
-  public CashPayment() {
+  public CashTransaction() {
   }
 
-  public CashPayment(String uniqueId, Double amount) {
+  public CashTransaction(String uniqueId, Double amount) {
     super(uniqueId);
     this.amount = amount;
   }
 
-  public CashPayment(Double amount) {
+  public CashTransaction(Double amount) {
     super();
     this.amount = amount;
   }
@@ -28,7 +28,7 @@ public class CashPayment extends BasePaymentDto {
     return doc;
   }
 
-  public static CashPayment fromDocument(Document document) {
-    return new CashPayment(document.get("_id").toString(),(Double) document.get("amount"));
+  public static CashTransaction fromDocument(Document document) {
+    return new CashTransaction(document.get("_id").toString(),(Double) document.get("amount"));
   }
 }

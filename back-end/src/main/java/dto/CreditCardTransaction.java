@@ -2,13 +2,13 @@ package dto;
 
 import org.bson.Document;
 
-public class CreditCardPayment extends BasePaymentDto {
+public class CreditCardTransaction extends BaseTransactionDto {
 
   private String number;
   private String securityCode;
   private static String type = "credit";
 
-  public CreditCardPayment(Double amount, String number, String securityCode) {
+  public CreditCardTransaction(Double amount, String number, String securityCode) {
     super();
     this.amount = amount;
     this.number = number;
@@ -25,8 +25,8 @@ public class CreditCardPayment extends BasePaymentDto {
     return doc;
   }
 
-  public static CreditCardPayment fromDocument(Document document){
-    return new CreditCardPayment((Double)document.get("amount"),
+  public static CreditCardTransaction fromDocument(Document document){
+    return new CreditCardTransaction((Double)document.get("amount"),
             (String) document.get("number"),
             (String) document.get("securityCode"));
   }

@@ -1,8 +1,8 @@
 package handler;
 
 import com.google.gson.Gson;
-import dao.PaymentDao;
-import dto.BasePaymentDto;
+import dao.TransactionDao;
+import dto.BaseTransactionDto;
 import request.ParsedRequest;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class GetAllPaymentsHandler implements BaseHandler {
 
   @Override
   public String handleRequest(ParsedRequest request) {
-    List<BasePaymentDto> payments = PaymentDao.getInstance().getAll();
+    List<BaseTransactionDto> payments = TransactionDao.getInstance().getAll();
     return gson.toJson(payments);
   }
 }

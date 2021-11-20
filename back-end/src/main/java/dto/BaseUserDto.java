@@ -6,8 +6,8 @@ import org.bson.Document;
 public abstract class BaseUserDto implements BaseDto {
 
     private String uniqueId;
-    private String username;
-    private String password;
+    protected String username;
+    protected String password;
 
     public BaseUserDto() {}
 
@@ -29,9 +29,17 @@ public abstract class BaseUserDto implements BaseDto {
         return this;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public BaseUserDto setPassword(String password) {
         this.password = password;
         return this;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public abstract Document toDocument();

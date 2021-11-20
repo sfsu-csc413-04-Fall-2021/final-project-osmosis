@@ -1,8 +1,8 @@
 package handler;
 
 import com.google.gson.Gson;
-import dao.PaymentDao;
-import dto.CashPayment;
+import dao.TransactionDao;
+import dto.CashTransaction;
 import request.ParsedRequest;
 
 public class CashPaymentHandler  implements BaseHandler{
@@ -13,8 +13,8 @@ public class CashPaymentHandler  implements BaseHandler{
   @Override
   public String handleRequest(ParsedRequest request) {
     if(!request.getMethod().equals("POST")) return "404 Not Found";
-    CashPayment cashPayment = gson.fromJson(request.getBody(),CashPayment.class);
-    PaymentDao.getInstance().put(cashPayment);
+    CashTransaction cashPayment = gson.fromJson(request.getBody(), CashTransaction.class);
+    TransactionDao.getInstance().put(cashPayment);
     return "200 OK";
   }
 }

@@ -1,8 +1,8 @@
 package handler;
 
 import com.google.gson.Gson;
-import dao.PaymentDao;
-import dto.CreditCardPayment;
+import dao.TransactionDao;
+import dto.CreditCardTransaction;
 import request.ParsedRequest;
 
 public class CreditCardPaymentHandler  implements BaseHandler{
@@ -13,8 +13,8 @@ public class CreditCardPaymentHandler  implements BaseHandler{
   @Override
   public String handleRequest(ParsedRequest request) {
     if(!request.getMethod().equals("POST")) return "404 Not Found";
-    CreditCardPayment creditPayment = gson.fromJson(request.getBody(),CreditCardPayment.class);
-    PaymentDao.getInstance().put(creditPayment);
+    CreditCardTransaction creditPayment = gson.fromJson(request.getBody(), CreditCardTransaction.class);
+    TransactionDao.getInstance().put(creditPayment);
     return "200 OK";
   }
 

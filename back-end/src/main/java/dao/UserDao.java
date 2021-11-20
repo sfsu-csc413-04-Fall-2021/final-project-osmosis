@@ -2,10 +2,7 @@ package dao;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import dto.BasePaymentDto;
 import dto.BaseUserDto;
-import dto.CashPayment;
-import dto.CreditCardPayment;
 import org.bson.Document;
 
 import java.util.ArrayList;

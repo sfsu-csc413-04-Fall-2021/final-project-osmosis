@@ -1,8 +1,8 @@
 package handler;
 
 import com.google.gson.Gson;
-import dao.PaymentDao;
-import dto.BasePaymentDto;
+import dao.TransactionDao;
+import dto.BaseTransactionDto;
 import request.ParsedRequest;
 
 public class GetPaymentHandler implements BaseHandler {
@@ -11,7 +11,7 @@ public class GetPaymentHandler implements BaseHandler {
 
   @Override
   public String handleRequest(ParsedRequest request) {
-    BasePaymentDto payment = PaymentDao.getInstance().get(request.getQueryParam("id"));
+    BaseTransactionDto payment = TransactionDao.getInstance().get(request.getQueryParam("id"));
     payment.setUniqueId(request.getQueryParam("id"));
     return gson.toJson(payment);
   }
