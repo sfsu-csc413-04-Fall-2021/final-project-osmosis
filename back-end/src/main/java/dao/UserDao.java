@@ -2,6 +2,7 @@ package dao;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import dto.BaseTransactionDto;
 import dto.BaseUserDto;
 import org.bson.Document;
 
@@ -46,11 +47,8 @@ public class UserDao implements BaseDao<BaseUserDto> {
     @Override
     public List getAll() {
         List<BaseUserDto> all = new ArrayList<>();
-        List<Document> docs = new ArrayList<>();
-        FindIterable<Document> iterable = collection.find(exists("_id"));
-        System.out.println(collection.countDocuments());
+        List<Document> docs = collection.find().into(new ArrayList<>());
 
-        iterable.into(docs);
         System.out.println(docs);
         for(Document doc:docs) {
             all.add(BaseUserDto.toDto(doc));

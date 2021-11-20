@@ -7,6 +7,8 @@ public abstract class BaseTransactionDto implements BaseDto {
 
     private String uniqueId;
     public Double amount;
+    public String note;
+    public String timeStamp;
 
     public BaseTransactionDto() {}
 

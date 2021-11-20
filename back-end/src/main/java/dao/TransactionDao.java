@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.CashTransaction;
-import dto.CreditCardTransaction;
+import dto.UserToUserTransaction;
 import org.bson.Document;
 
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.exists;
 
 public class TransactionDao implements BaseDao<BaseTransactionDto> {
 
@@ -23,7 +22,7 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
 
   public static TransactionDao getInstance() {
     if (instance == null) {
-      instance = new TransactionDao(MongoConnection.getCollection("Payments"));
+      instance = new TransactionDao(MongoConnection.getCollection("Transactions"));
     }
     return instance;
   }
@@ -54,7 +53,7 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
       if(doc.get("type").equals("cash")) {
         all.add(CashTransaction.fromDocument(doc));
       } else if(doc.get("type").equals("credit")) {
-        all.add(CreditCardTransaction.fromDocument(doc));
+        all.add(UserToUserTransaction.fromDocument(doc));
       }
       System.out.println(doc);
     }

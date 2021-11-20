@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import dao.UserDao;
 import dto.BaseUserDto;
 import dto.BasicUser;
+import dto.UserToUserTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,26 +13,57 @@ import static spark.Spark.*;
 
 class SignUpResultDto {
     Boolean isSuccess;
-    String error;
+    List<String> errors = new ArrayList<>();
+
+    public SignUpResultDto(Boolean isSuccess) {
+        this.isSuccess = isSuccess;
+    }
 
     public SignUpResultDto(Boolean isSuccess, String error) {
         this.isSuccess = isSuccess;
-        this.error = error;
+        this.errors.add(error);
+    }
+
+    public void add(String error) {
+        this.isSuccess = false;
+        this.errors.add(error);
     }
 }
 
 class Validator {
-    public static boolean isValidUsername(String username) {
+    public static SignUpResultDto isValidUsername(SignUpResultDto result, String username) {
         if(username.length() < 3) { //check length of username
-            return false;
+            result.add("Username is not long enough");
         }
-        if(!((username.charAt(0) >= 65 && username.charAt(0) <= 90)
-                || (username.charAt(0) >= 97 && username.charAt(0) <= 122))) { //if starts with a letter
-            return false;
+        if(username.length() > 20) {
+            result.add("Username is too long");
         }
-        return true;
+        if(username.matches("[a-zA-Z].")) { //if starts with a letter
+            result.add("Username does not start with a letter");
+        }
+        return result;
+    }
+    public static SignUpResultDto isValidPassword(SignUpResultDto result, String password) {
+        if(password.length() < 8) { //check length of password
+            result.add("Password is not long enough");
+        }
+        if(password.matches(".\\d.")) { //if contains a number
+            result.add("Password does not contain a number");
+        }
+        if(password.matches(".[A-Z].")) { //if contains a capital letter
+            result.add("Password does not contain a capital letter");
+        }
+        if(password.matches(".[a-z].")) { //if contains a lowercase letter
+            result.add("Password does not contain a lowercase letter");
+        }
+        return result;
+    }
+    public static SignUpResultDto isValidPasswordDebug() {
+        return new SignUpResultDto(true, null);
     }
 }
+
+
 
 public class SparkDirectory {
 
@@ -42,23 +74,38 @@ public class SparkDirectory {
 
         post("/api/sign-up", (req,res) -> {
             String body = req.body();
+            SignUpResultDto result = new SignUpResultDto(true);
             BasicUser user = gson.fromJson(body, BasicUser.class);
+            result = Validator.isValidUsername(result, user.getUsername());
+            result = Validator.isValidPassword(result, user.getPassword());
+            if(!result.isSuccess) return result;
             boolean usernameIsTaken = UserDao.getInstance().getAll().stream()
                     .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(user.getUsername()));
             if(usernameIsTaken) {
                 System.out.println("Username duplicate found");
-                var result = new SignUpResultDto(false, "Username duplicate found");
+                result.add("Username duplicate found");
                 return gson.toJson(result);
             }
             UserDao.getInstance().put(user);
             System.out.println(body);
             System.out.println("Total users : "+UserDao.getInstance().getAll().size());
+            return gson.toJson(result);
+        });
+
+        post("/api/log-in", (req,res) -> { //TODO
             var result = new SignUpResultDto(true, null);
             return gson.toJson(result);
         });
 
-        post("/api/log-in", (req,res) -> {
-            return gson.toJson(res);
+        post("/api/pay", (req,res) -> {
+            String body = req.body();
+            SignUpResultDto result = new SignUpResultDto(true, null);
+            UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
+
+            //TODO check if enough funds
+            //TODO if not ask for bank
+
+            return gson.toJson(result);
         });
     }
 }

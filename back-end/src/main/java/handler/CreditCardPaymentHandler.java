@@ -2,7 +2,7 @@ package handler;
 
 import com.google.gson.Gson;
 import dao.TransactionDao;
-import dto.CreditCardTransaction;
+import dto.UserToUserTransaction;
 import request.ParsedRequest;
 
 public class CreditCardPaymentHandler  implements BaseHandler{
@@ -13,7 +13,7 @@ public class CreditCardPaymentHandler  implements BaseHandler{
   @Override
   public String handleRequest(ParsedRequest request) {
     if(!request.getMethod().equals("POST")) return "404 Not Found";
-    CreditCardTransaction creditPayment = gson.fromJson(request.getBody(), CreditCardTransaction.class);
+    UserToUserTransaction creditPayment = gson.fromJson(request.getBody(), UserToUserTransaction.class);
     TransactionDao.getInstance().put(creditPayment);
     return "200 OK";
   }

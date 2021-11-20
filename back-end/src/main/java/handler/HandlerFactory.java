@@ -6,11 +6,11 @@ public class HandlerFactory {
 
   public static BaseHandler getHandler(ParsedRequest request) {
     switch(request.getPath()) {
-      case "/makeCashPayment":
+      case "/transfer":
         return new CashPaymentHandler();
-      case "/makeCreditCardPayment":
+      case "/pay":
         return new CreditCardPaymentHandler();
-      case "/getPayment":
+      case "/sign-up":
         return new GetPaymentHandler();
       case "/getAllPayments":
         return new GetAllPaymentsHandler();
