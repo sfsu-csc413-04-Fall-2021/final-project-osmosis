@@ -40,4 +40,8 @@ public class BasicUser extends BaseUserDto {
                 (Double) document.get("funds"));
     }
 
+    public Double getFunds() {
+        return funds;
+    }
+
 }

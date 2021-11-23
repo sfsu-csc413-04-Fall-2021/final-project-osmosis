@@ -1,6 +1,7 @@
 package server;
 
 import com.google.gson.Gson;
+import dao.TransactionDao;
 import dao.UserDao;
 import dto.*;
 
@@ -105,10 +106,24 @@ public class SparkDirectory {
             SignUpResultDto result = new SignUpResultDto(true, null);
             UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
 
-            //TODO check if valid sender, recipient
-            //TODO check if enough funds
-            //TODO if not ask for bank
-            //TODO add to TransactionDao
+            BasicUser sender = (BasicUser) UserDao.getInstance().get(payment.getSender());
+            BasicUser recipient = (BasicUser) UserDao.getInstance().get(payment.getRecipient());
+
+            boolean senderExists = UserDao.getInstance().getAll().stream()
+                    .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(sender.getUsername()));
+            boolean recipientExists = UserDao.getInstance().getAll().stream()
+                    .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(recipient.getUsername()));
+            if(!(senderExists && recipientExists)) {
+                System.out.println("At least one user not found");
+                result.add("At least one user not found");
+                return gson.toJson(result);
+            }
+            //Check if sender has enough funds
+            if(sender.getFunds() < payment.amount) {
+                //TODO if not enough funds, send user to "add funds screen"
+            }
+            //If everything is successful
+            TransactionDao.getInstance().put(payment);
 
             return gson.toJson(result);
         });
