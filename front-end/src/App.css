@@ -1,0 +1,48 @@
+#main{
+    grid-area: content;
+    padding-top: .35em;
+    padding-bottom: .35em;
+    display: grid;
+    gap: .1rem .3rem;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+    "home login logout"
+    "tran . payment";
+    
+}
+
+#home{
+    grid-area: home;
+}
+
+#login{
+    grid-area: login;
+}
+#logout{
+    grid-area: logout;
+}
+#tran{
+    grid-area: tran;
+}
+#payment{
+    grid-area: payment;
+}
+
+.headers{
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    border: 2px rgb(191, 191, 197) solid;
+    color: grey;
+    transition-duration: 0.4s;
+    text-decoration: none;
+}
+.headers:visited{
+    background-color: none;
+    color: none;
+}
+.headers:hover{
+    background-color: rgb(177, 163, 163);
+    color: grey;
+}
