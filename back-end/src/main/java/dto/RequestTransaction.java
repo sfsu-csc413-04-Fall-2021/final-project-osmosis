@@ -31,6 +31,10 @@ public class RequestTransaction extends BaseTransactionDto {
         return doc;
     }
 
+    public UserToUserTransaction complete() {
+        return new UserToUserTransaction(amount, recipientId, senderId, note, timeStamp, "public");
+    }
+
     public static RequestTransaction fromDocument(Document document){
         return new RequestTransaction((Double)document.get("amount"),
                 (String) document.get("recipient"),
