@@ -24,7 +24,7 @@ function App() {
           <div id="login" class="headers">Log In</div>
           </Link> 
           <Link to="/Logout" class = "headers">     
-          <div id="logout" class="headers">Logout</div>
+          <div id="logout" class="headers" >Logout</div>
           </Link> 
           <Link to="/Transactions" class = "headers">         
           <div id="tran" class="headers">Transactions</div>

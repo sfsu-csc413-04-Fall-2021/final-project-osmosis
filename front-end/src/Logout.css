@@ -1,0 +1,14 @@
+.div-1{
+    border-radius: 10px;
+    background-color: rgb(205, 205, 214);
+    width: 350px;
+    height: 250px;
+    padding: 4px;
+    border: rgb(26, 22, 22);
+    
+    margin: 250px auto auto auto;
+    text-align: center;
+    box-shadow: 5px 10px 50px rgb(160, 156, 158);
+    
+    
+}
