@@ -4,18 +4,28 @@
     padding-bottom: .35em;
     display: grid;
     gap: .1rem .3rem;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr ;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: 
-    "home login logout"
-    "tran . payment";
-    
+    "home signup login"
+    "logout tran payment";
+    background-color: black;
+}
+
+#pagebody{
+    background-color: rgb(177, 163, 163);
+    font-size: 50px;
+    text-align: center;
+    color: white;
+    /*width: 1262.8px;
+    height: 629.2px;
+    background-image: url('https://exchangerateiq.com/Riq/images/posts/posts_image/1593762776moneyfactor.jpg');
+    */
 }
 
 #home{
     grid-area: home;
 }
-
 #login{
     grid-area: login;
 }
@@ -28,13 +38,22 @@
 #payment{
     grid-area: payment;
 }
+#signup{
+    grid-area: signup;
+}
+#photo{
+    width: 1262.8px;
+    height: 500px;
+
+}
+
 
 .headers{
     font-size: 20px;
     width: 100%;
     text-align: center;
-    border: 2px rgb(191, 191, 197) solid;
-    color: grey;
+    /*border: 2px rgb(191, 191, 197) solid;*/
+    color: white;
     transition-duration: 0.4s;
     text-decoration: none;
 }
@@ -44,5 +63,5 @@
 }
 .headers:hover{
     background-color: rgb(177, 163, 163);
-    color: grey;
+    /*color: grey;*/
 }

@@ -7,7 +7,7 @@ function Login() {
     const [user,setUser]= React.useState('');
     const [password, setPassword]=React.useState('');
   
-  const myHandler= () => {
+    const myHandler= () => {
   
     console.log( 'Username= '+ user);
     console.log( 'Password= ' +password);
@@ -23,16 +23,16 @@ function Login() {
     fetch('/api/log-in', settings)
   
   
-  };
+    };
   
   
   
-    return (
-      <div className="login-box" >
+  return (
+    <div className="login-box" >
   
         <div className="log-in">
           <div className="contents">
-          <h2>Please Login</h2>
+          <h2>Please Log In</h2>
           <div className="username">
             <label>Username</label>
             <br>
@@ -49,9 +49,11 @@ function Login() {
             </input>
             <br>
             </br>
+            <br>
+            </br>
             
   
-      <button onClick={myHandler}>Submit</button>
+            <button onClick={myHandler}>Enter</button>
           </div>
           </div>
           
@@ -65,7 +67,7 @@ function Login() {
        
         
     
-    );
-  }
+ );
+}
 
 export default Login;
