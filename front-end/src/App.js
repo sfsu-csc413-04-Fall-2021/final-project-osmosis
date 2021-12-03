@@ -19,13 +19,13 @@ function App() {
           </div>      
           <div id="logout" className="headers">
             <Link to="/Logout">Logout</Link>
-          </div>          
-          <div id="tran" className="headers">
-            <Link to="/Transactions">Transactions</Link>
-          </div>
-          <div id="payment" className="headers">
-            <Link to= "/MakePayment">Make a Payment</Link>
-          </div>
+          </div>       
+          <Link to="/Transactions">
+            <div id="tran" className="headers">Transactions</div>
+          </Link>
+          <Link to= "/MakePayment">
+            <div id="payment" className="headers">Make Payment</div>
+          </Link>
         </div>
         
       </nav>
