@@ -5,6 +5,7 @@ import { Link, Switch, Route} from 'react-router-dom';
 import Login from './Login';
 import Logout from './Logout';
 
+
 function App() {  
 
   return (
@@ -14,6 +15,7 @@ function App() {
           <div id="home" className="headers">
             <Link to="/">Home</Link>
           </div>
+          
           <div id="login" className="headers">
             <Link to="/Login">Login</Link>
           </div>      
@@ -33,6 +35,7 @@ function App() {
       <Switch>
         <Route path ="/Login">  <Login />  </Route>
         <Route path ="/Logout">  <Logout />  </Route>
+       
       </Switch>
 
     </div>

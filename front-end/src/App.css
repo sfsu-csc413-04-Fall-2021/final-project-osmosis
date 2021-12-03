@@ -4,7 +4,7 @@
     padding-bottom: .35em;
     display: grid;
     gap: .1rem .3rem;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr ;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: 
     "home login logout"
@@ -15,7 +15,6 @@
 #home{
     grid-area: home;
 }
-
 #login{
     grid-area: login;
 }
@@ -28,6 +27,7 @@
 #payment{
     grid-area: payment;
 }
+
 
 .headers{
     font-size: 20px;
