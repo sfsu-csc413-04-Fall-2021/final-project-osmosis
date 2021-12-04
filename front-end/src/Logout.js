@@ -5,13 +5,14 @@ import "./Logout.css";
 function Logout(){
 
     const myRedirect=()=>{
-        window.open("http://localhost:3000/")
+        window.location.replace("http://localhost:3000/")
     }
+   
     return(
         <div className="div-1">
             <h1>Do you wish to Log-out?</h1>
-            <button onClick={myRedirect}>Yes</button>
-            <button>No</button>
+            <button className="button1" onClick={myRedirect} >Yes</button>
+            <button  className="button1">No</button>
             
         </div>
     );
