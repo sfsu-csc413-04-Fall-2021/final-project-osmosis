@@ -4,6 +4,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import dto.BaseTransactionDto;
 import dto.BaseUserDto;
+import dto.BasicUser;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class UserDao implements BaseDao<BaseUserDto> {
 
     public static UserDao getInstance() {
         if (instance == null) {
+            System.out.println("here getInstance");
             instance = new UserDao(MongoConnection.getCollection("Users"));
         }
         return instance;
@@ -46,12 +48,16 @@ public class UserDao implements BaseDao<BaseUserDto> {
 
     @Override
     public List getAll() {
-        List<BaseUserDto> all = new ArrayList<>();
+        List<BasicUser> all = new ArrayList<>();
         List<Document> docs = collection.find().into(new ArrayList<>());
 
         System.out.println(docs);
         for(Document doc:docs) {
-            all.add(BaseUserDto.toDto(doc));
+            System.out.println("here docs");
+            System.out.println(doc);
+            BasicUser user = BasicUser.fromDocument(doc);
+            all.add(user);
+            System.out.println(user.getUsername());
             System.out.println(doc);
         }
         return all;

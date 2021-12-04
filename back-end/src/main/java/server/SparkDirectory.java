@@ -7,12 +7,13 @@ import dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static spark.Spark.*;
 
 class SignUpResultDto {
     Boolean isSuccess;
-    List<String> errors = new ArrayList<>();
+    String error = "";
 
     public SignUpResultDto(Boolean isSuccess) {
         this.isSuccess = isSuccess;
@@ -20,12 +21,12 @@ class SignUpResultDto {
 
     public SignUpResultDto(Boolean isSuccess, String error) {
         this.isSuccess = isSuccess;
-        this.errors.add(error);
+        this.error = error;
     }
 
     public void add(String error) {
         this.isSuccess = false;
-        this.errors.add(error);
+        this.error += error + "; ";
     }
 }
 
@@ -73,16 +74,30 @@ public class SparkDirectory {
 
         post("/api/sign-up", (req,res) -> {
             String body = req.body();
+            System.out.println(body);
             SignUpResultDto result = new SignUpResultDto(true);
             BasicUser user = gson.fromJson(body, BasicUser.class);
+            System.out.println(user.getUsername()+", "+user.getPassword()+", "+user.getConfirm());
+            if(!user.getPassword().equals(user.getConfirm())) {
+                System.out.println("Passwords do not match");
+                result.add("Passwords do not match");
+                return result;
+            }
             result = Validator.isValidUsername(result, user.getUsername());
-            result = Validator.isValidPassword(result, user.getPassword());
-            if(!result.isSuccess) return result;
+//            result = Validator.isValidPassword(result, user.getPassword());
+            result = Validator.isValidPasswordDebug();
+            if(!result.isSuccess) {
+                System.out.println(result.error);
+                return result;
+            }
+            System.out.println("here");
+            Predicate<BaseUserDto> userExists = existingUser -> existingUser.getUsername().equals("dill");
             boolean usernameIsTaken = UserDao.getInstance().getAll().stream()
-                    .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(user.getUsername()));
+                    .anyMatch(userExists);
+            System.out.println("here 2");
             if(usernameIsTaken) {
-                System.out.println("Username duplicate found");
-                result.add("Username duplicate found");
+                System.out.println("Username already exists");
+                result.add("Username already exists");
                 return gson.toJson(result);
             }
             UserDao.getInstance().put(user);
