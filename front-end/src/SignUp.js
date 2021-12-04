@@ -6,6 +6,7 @@ function SignUp() {
     const [user,setUser]= React.useState('');
     const [password, setPassword]= React.useState('');
     const [repassword, setRePassword]= React.useState('');
+    const [result, setResult] = React.useState(null);
   
     const myHandler= () => {
   
@@ -23,6 +24,16 @@ function SignUp() {
         body: JSON.stringify(body),
     };
     fetch('/api/sign-up', settings)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        if(data.isSuccess) {
+            setResult(true);
+        } else {
+            setResult(data.error);
+        }
+    })
+    .catch(console.log);
   
   };
 
