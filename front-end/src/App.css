@@ -4,7 +4,7 @@
     padding-bottom: .35em;
     display: grid;
     gap: .1rem .3rem;
-    grid-template-rows: 1fr 1fr ;
+    grid-template-rows: 1fr ;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: 
     "home signup login"
@@ -12,10 +12,19 @@
     background-color: black;
 }
 
-#pagebody{
+body{
+    background-image: url('https://exchangerateiq.com/Riq/images/posts/posts_image/1593762776moneyfactor.jpg');
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#title{
     background-color: rgb(177, 163, 163);
     font-size: 50px;
     text-align: center;
+    padding-bottom: .5rem;
     color: white;
     /*width: 1262.8px;
     height: 629.2px;
@@ -29,15 +38,15 @@
 #login{
     grid-area: login;
 }
-#logout{
+/*#logout{
     grid-area: logout;
-}
-#tran{
+}*/
+/*#tran{
     grid-area: tran;
-}
-#payment{
+}*/
+/*#payment{
     grid-area: payment;
-}
+}*/
 #signup{
     grid-area: signup;
 }
