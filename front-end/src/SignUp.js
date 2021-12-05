@@ -13,16 +13,37 @@ function SignUp() {
           var ABC = new RegExp(
               "(?=.*[A-Z])"
           );
+          var one = new RegExp(
+              "(?=.*\\d)"
+          );
     
         if(ABC.test(user)){
         } else{ 
             window.alert("Username has to have an Uppercased letter")
+            return false;
         }
         if(user.length<=6) {
-            window.alert("Username must be 6 or more characters")
+            window.alert("Username must be more than 6 characters")
+            return false;
         
-        }if(password!=repassword){
+        } if(ABC.test(password)){
+        }else{
+            window.alert("Password must contain a Uppercase letter.")
+            return false;
+            
+    
+        }if(password.length<=6){
+            window.alert("Password must be more than 6 characters")
+            return false;
+        }if(one.test(password)){
+        }else{
+        window.alert("Password must contain one numeric value")
+        return false;
+         }
+        if(password!=repassword){
             window.alert("Passwords do not match")
+            return false;
+        
         }else{
         
     
@@ -78,7 +99,7 @@ function SignUp() {
                     <label>Re-enter Password</label>
                     <br>
                     </br>
-                    <input type="repassword" value={repassword} onChange={(e) => setRePassword(e.target.value)} className="userName-input">
+                    <input type="password" value={repassword} onChange={(e) => setRePassword(e.target.value)} className="userName-input">
                     </input>
                     <br>
                     </br>
