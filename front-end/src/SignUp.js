@@ -1,5 +1,6 @@
 import React from "react";
 import "./SignUp.css";
+import { Link, Switch, Route} from 'react-router-dom';
 
 function SignUp() {
 
@@ -56,6 +57,8 @@ function SignUp() {
     })
     .catch(console.log);
   
+    
+
   };
 
     return(
@@ -93,7 +96,9 @@ function SignUp() {
                     <br>
                     </br>
 
-                    <button onClick={myHandler} >Submit</button>
+                        <Link to= "SignedInPage">
+                        <button onClick={myHandler} >Submit</button> 
+                        </Link>
                 </div>
                 </div>
             </div>
