@@ -11,6 +11,13 @@ function App() {
 
   return (
     <div >
+
+      <div>
+        <div id = "title">
+          <label>Welcome to Osmosis Payments</label>
+        </div>
+      </div>
+
       <nav>
 
         <div id="main">
@@ -23,25 +30,14 @@ function App() {
           <Link to="/Login" class = "headers">
           <div id="login" class="headers">Log In</div>
           </Link> 
-          <Link to="/Logout" class = "headers">     
-          <div id="logout" class="headers" >Logout</div>
-          </Link> 
-          <Link to="/Transactions" class = "headers">         
-          <div id="tran" class="headers">Transactions</div>
-          </Link>
-          <Link to= "/MakePayment" class = "headers">
-          <div id="payment" class="headers">Make a Payment</div>
-          </Link>
+          
         </div>
         
       </nav>
 
-      <div>
-        <div id = "pagebody">
-          <label>Welcome to Osmosis Payments</label>
-        </div>
-      </div>
-<img id = "photo" class = "photos" src = "https://exchangerateiq.com/Riq/images/posts/posts_image/1593762776moneyfactor.jpg" alt = "photo"></img>
+      <div id ="background"></div>
+
+      
       
       <Switch>
         <Route path ="/Login">  <Login />  </Route>
@@ -62,5 +58,14 @@ function App() {
 
 export default App;
 
+/*<Link to="/Logout" class = "headers">     
+          <div id="logout" class="headers" >Logout</div>
+          </Link> 
+          <Link to="/Transactions" class = "headers">         
+          <div id="tran" class="headers">Transactions</div>
+          </Link>
+          <Link to= "/MakePayment" class = "headers">
+          <div id="payment" class="headers">Make a Payment</div>
+          </Link>*/
 
-
+//</div>img id = "photo" class = "photos" src = "https://exchangerateiq.com/Riq/images/posts/posts_image/1593762776moneyfactor.jpg" alt = "photo"></img>

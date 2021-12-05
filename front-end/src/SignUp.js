@@ -1,14 +1,14 @@
 import React from "react";
 import "./SignUp.css";
+import { Link, Switch, Route} from 'react-router-dom';
 
 function SignUp() {
 
     const [user,setUser]= React.useState('');
     const [password, setPassword]= React.useState('');
     const [repassword, setRePassword]= React.useState('');
-
-
-        
+    const [result, setResult] = React.useState(null);
+  
     const myHandler= () => {
           var ABC = new RegExp(
               "(?=.*[A-Z])"
@@ -67,9 +67,20 @@ function SignUp() {
         body: JSON.stringify(body),
         };
     fetch('/api/sign-up', settings)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        if(data.isSuccess) {
+            setResult(true);
+        } else {
+            setResult(data.error);
+        }
+    })
+    .catch(console.log);
+  
+    
 
-    };
-
+  };
 
     return(
 
@@ -106,7 +117,9 @@ function SignUp() {
                     <br>
                     </br>
 
-                    <button onClick={myHandler} >Submit</button>
+                        <Link to= "SignedInPage">
+                        <button onClick={myHandler} >Submit</button> 
+                        </Link>
                 </div>
                 </div>
             </div>

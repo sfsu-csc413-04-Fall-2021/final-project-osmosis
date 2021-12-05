@@ -32,23 +32,15 @@ body{
     */
 }
 
-#home{
-    grid-area: home;
+#transactions{
+    grid-area: transactions;
 }
-#login{
-    grid-area: login;
+#makepayment{
+    grid-area: makepayment;
 }
-/*#logout{
+
+#logout{
     grid-area: logout;
-}*/
-/*#tran{
-    grid-area: tran;
-}*/
-/*#payment{
-    grid-area: payment;
-}*/
-#signup{
-    grid-area: signup;
 }
 #photo{
     width: 1262.8px;

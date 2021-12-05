@@ -1,5 +1,7 @@
 import React from "react";
 import "./Login.css";
+import { Link, Switch, Route} from 'react-router-dom';
+
 
 
 function Login() {
@@ -53,7 +55,10 @@ function Login() {
             </br>
             
   
-            <button onClick={myHandler}>Enter</button>
+            
+            <Link to= "SignedInPage">
+                        <button onClick={myHandler} >Enter</button> 
+                        </Link>
           </div>
           </div>
           
@@ -71,3 +76,4 @@ function Login() {
 }
 
 export default Login;
+//<button onClick={myHandler}>Enter</button>
