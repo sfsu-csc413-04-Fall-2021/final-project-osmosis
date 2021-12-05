@@ -37,6 +37,10 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
     collection.insertOne(baseTransactionDto.toDocument());
   }
 
+  public void delete(BaseTransactionDto baseTransactionDto) {
+    collection.deleteOne(baseTransactionDto.toDocument());
+  }
+
   @Override
   public BaseTransactionDto get(String id) {
     Document doc = collection.find(eq("_id",id)).first();
