@@ -8,6 +8,13 @@ import SignUp from './SignUp';
 import SignedInPage from './SignedInPage';
 import Default from './Default';
 
+function Header(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <SignedInPage />;
+  }
+  return <Default />;
+}
 
 function App() {
 
@@ -15,10 +22,10 @@ function App() {
     const d = new Date();
     d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
     let expires = "expires" + d.toUTCString();
-    document.cookie = user + "=" + user + ";" + ";path=/";
+    document.cookie = username + "=" + username + ";" + ";path=/";
   }
   function getCookie(username) {
-    let name = user + "=";
+    let name = username + "=";
     let c1 = document.cookie.split(';');
     for (let i = 0; i < c1.length; i++) {
       let c = c1[i];
@@ -31,10 +38,8 @@ function App() {
     }
     return "";
   }
-
   function checkCookie() {
-    let user = getCookie(user);
-    if (user != "") {
+    if (document.cookie != "") {
       console.log("session active")
       return true;
     } else {
@@ -54,21 +59,7 @@ function App() {
 
       <nav>
 
-        <div id="main">
-
-          <Link to="/MakePayment" class="headers">
-            <div id="makepayment" class="headers">Make a Payment</div>
-          </Link>
-          <Link to="/Logout" class="headers">
-            <div id="logout" class="headers">Log Out</div>
-          </Link>
-
-        </div>
-
-        <Switch>
-          <Route path="/SignedInPage"> <SignedInPage /> </Route>
-          <Route path="/"> <Default /> </Route>
-        </Switch>
+      <Header isLoggedIn={false}/>
 
       </nav>
 

@@ -2,10 +2,6 @@ import React from "react";
 import "./SignUp.css";
 import { Link, Switch, Route } from 'react-router-dom';
 
-const ConditionalLink = ({ children, to, condition }) => (!!condition && to)
-    ? <Link to={to}>{children}</Link>
-    : <>{children}</>;
-
 function SignUp() {
 
     const [user, setUser] = React.useState('');
@@ -14,8 +10,7 @@ function SignUp() {
     const [result, setResult] = React.useState(null);
 
     setCookie(user);
-    console.log(getCookie(user));
-
+    console.log(getCookie);
     const myHandler = () => {
         var ABC = new RegExp(
             "(?=.*[A-Z])"
@@ -26,17 +21,6 @@ function SignUp() {
 
         if (ABC.test(user)) {
         } else {
-    console.log(getCookie);
-    const myHandler= () => {
-          var ABC = new RegExp(
-              "(?=.*[A-Z])"
-          );
-          var one = new RegExp(
-              "(?=.*\\d)"
-          );
-    
-        if(ABC.test(user)){
-        } else{ 
             window.alert("Username has to have an Uppercased letter")
             return false;
         }
@@ -57,20 +41,6 @@ function SignUp() {
         } else {
             window.alert("Password must contain one numeric value")
             return false;
-<<<<<<< HEAD
-=======
-        
-        }else{
-        
-    
-
-  
-    console.log( 'Username= '+ user);
-    console.log( 'Password= ' + password);
-    console.log( 'RePassword= '+ repassword)
-
-    
->>>>>>> 5d5043c3d724fc56b7ad9107c85dfb5034bb96df
         }
         if (password != repassword) {
             window.alert("Passwords do not match")
@@ -83,41 +53,10 @@ function SignUp() {
 
             console.log('Username= ' + user);
             console.log('Password= ' + password);
-            console.log('RePassword= ' + repassword);
+            console.log('RePassword= ' + repassword)
 
-            function setCookie(username) {
-                const d = new Date();
-                d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
-                let expires = "expires" + d.toUTCString();
-                document.cookie = user + "=" + user + ";" + ";path=/";
-            }
-            function getCookie(username) {
-                let name = user + "=";
-                let c1 = document.cookie.split(';');
-                for (let i = 0; i < c1.length; i++) {
-                    let c = c1[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
 
-            function checkCookie() {
-                let user = getCookie(user);
-                if (user != "") {
-                    console.log("session active")
-                    return true;
-                } else {
-                    console.log("session over")
-                    return false;
-                }
-            }
         }
-<<<<<<< HEAD
 
 
 
@@ -137,15 +76,47 @@ function SignUp() {
                 console.log(data);
                 if (data.isSuccess) {
                     setResult(true);
-                    window.location.replace('../SignedInPage');
                 } else {
                     setResult(data.error);
                 }
             })
             .catch(console.log);
 
+
+
     };
 
+    function setCookie(username) {
+        const d = new Date();
+        d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
+        let expires = "expires" + d.toUTCString();
+        document.cookie = user + "=" + user + ";" + ";path=/";
+    }
+    function getCookie(username) {
+        let name = user + "=";
+        let c1 = document.cookie.split(';');
+        for (let i = 0; i < c1.length; i++) {
+            let c = c1[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function checkCookie() {
+        let user = getCookie(user);
+        if (user != "") {
+            console.log("session active")
+            return true;
+        } else {
+            console.log("session over")
+            return false;
+        }
+    }
     return (
 
 
@@ -180,87 +151,11 @@ function SignUp() {
                         </br>
                         <br>
                         </br>
-                        <button onClick={myHandler} >Submit</button>
-                    </div>
-=======
-    })
-    .catch(console.log);
-  
-    
 
-  };
-
-  function setCookie(username){
-    const d = new Date();
-    d.setTime(d.getTime() +(10*24*60*60*1000));
-    let expires = "expires" + d.toUTCString();
-    document.cookie = user +  "=" + user + ";" + ";path=/";
-  }
-  function getCookie(username){
-    let name = user + "=";
-    let c1 = document.cookie.split(';');
-    for (let i =0; i <c1.length; i++){
-      let c = c1[i];
-      while (c.charAt(0) == ' '){
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0){
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
-  function checkCookie(){
-    let user = getCookie(user);
-    if (user !=""){
-      console.log("session active")
-      return true;
-    }else{
-      console.log("session over")
-      return false;
-    }
-  }
-    return(
-
-
-        <div className = "sign-up box">
-            
-            <div className = "sign-up-area">
-                <div className = "contents">
-                <h2>Sign Up for Osmosis Payment</h2>
-                <div className = "setUsername">
-                    <label>Enter a Username</label>
-                    <br>
-                    </br>
-                    <input id="username" value={user} onChange={(e) => setUser(e.target.value)} className="userName-input">
-                    </input>
-                    <br>
-                    </br>
-
-                    <label>Enter a Password</label>
-                    <br>
-                    </br>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="userName-input">
-                    </input>
-                    <br>
-                    </br>
-
-                    <label>Re-enter Password</label>
-                    <br>
-                    </br>
-                    <input type="password" value={repassword} onChange={(e) => setRePassword(e.target.value)} className="userName-input">
-                    </input>
-                    <br>
-                    </br>
-                    <br>
-                    </br>
-
-                        <Link to= "SignedInPage">
-                        <button onClick={myHandler} >Submit</button> 
+                        <Link to="SignedInPage">
+                            <button onClick={myHandler} >Submit</button>
                         </Link>
-                </div>
->>>>>>> 5d5043c3d724fc56b7ad9107c85dfb5034bb96df
+                    </div>
                 </div>
             </div>
         </div>
