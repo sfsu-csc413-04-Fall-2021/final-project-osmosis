@@ -32,11 +32,6 @@ public class BasicUser extends BaseUserDto {
     }
 
     public static BasicUser fromDocument(Document document) {
-        System.out.println("here fromDocument");
-        System.out.println(document.get("_id").toString());
-        System.out.println(document.get("username").toString());
-        System.out.println(document.get("password").toString());
-        System.out.println((Double) document.get("funds"));
         BasicUser user = new BasicUser(document.get("_id").toString(),
                 document.get("username").toString(),
                 document.get("password").toString(),

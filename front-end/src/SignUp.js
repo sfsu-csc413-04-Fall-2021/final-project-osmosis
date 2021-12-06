@@ -2,6 +2,10 @@ import React from "react";
 import "./SignUp.css";
 import { Link, Switch, Route} from 'react-router-dom';
 
+const ConditionalLink = ({ children, to, condition }) => (!!condition && to)
+      ? <Link to={to}>{children}</Link>
+      : <>{children}</>;
+
 function SignUp() {
 
     const [user,setUser]= React.useState('');
@@ -72,13 +76,12 @@ function SignUp() {
         console.log(data);
         if(data.isSuccess) {
             setResult(true);
+            window.location.replace('../SignedInPage');
         } else {
             setResult(data.error);
         }
     })
     .catch(console.log);
-  
-    
 
   };
 
@@ -116,10 +119,7 @@ function SignUp() {
                     </br>
                     <br>
                     </br>
-
-                        <Link to= "SignedInPage">
-                        <button onClick={myHandler} >Submit</button> 
-                        </Link>
+                    <button onClick={myHandler} >Submit</button>
                 </div>
                 </div>
             </div>

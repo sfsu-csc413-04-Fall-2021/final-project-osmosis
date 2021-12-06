@@ -17,6 +17,7 @@ class SignUpResultDto {
 
     public SignUpResultDto(Boolean isSuccess) {
         this.isSuccess = isSuccess;
+        error = "";
     }
 
     public SignUpResultDto(Boolean isSuccess, String error) {
@@ -32,19 +33,16 @@ class SignUpResultDto {
 
 class Validator {
     public static SignUpResultDto isValidUsername(SignUpResultDto result, String username) {
-        if(username.length() < 3) { //check length of username
+        if(username.length() < 6) { //check length of username
             result.add("Username is not long enough");
         }
-        if(username.length() > 20) {
-            result.add("Username is too long");
-        }
-        if(username.matches("[a-zA-Z].")) { //if starts with a letter
-            result.add("Username does not start with a letter");
+        if(username.matches(".[A-Z].")) { //if starts with a letter
+            result.add("Username does not contain a capital letter");
         }
         return result;
     }
     public static SignUpResultDto isValidPassword(SignUpResultDto result, String password) {
-        if(password.length() < 8) { //check length of password
+        if(password.length() < 6) { //check length of password
             result.add("Password is not long enough");
         }
         if(password.matches(".\\d.")) { //if contains a number
@@ -53,9 +51,9 @@ class Validator {
         if(password.matches(".[A-Z].")) { //if contains a capital letter
             result.add("Password does not contain a capital letter");
         }
-        if(password.matches(".[a-z].")) { //if contains a lowercase letter
-            result.add("Password does not contain a lowercase letter");
-        }
+//        if(password.matches(".[a-z].")) { //if contains a lowercase letter
+//            result.add("Password does not contain a lowercase letter");
+//        }
         return result;
     }
     public static SignUpResultDto isValidPasswordDebug() {
@@ -84,17 +82,13 @@ public class SparkDirectory {
                 return result;
             }
             result = Validator.isValidUsername(result, user.getUsername());
-//            result = Validator.isValidPassword(result, user.getPassword());
-            result = Validator.isValidPasswordDebug();
+            result = Validator.isValidPassword(result, user.getPassword());
             if(!result.isSuccess) {
                 System.out.println(result.error);
                 return result;
             }
-            System.out.println("here");
-            Predicate<BaseUserDto> userExists = existingUser -> existingUser.getUsername().equals("dill");
             boolean usernameIsTaken = UserDao.getInstance().getAll().stream()
-                    .anyMatch(userExists);
-            System.out.println("here 2");
+                    .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(user.getUsername()));
             if(usernameIsTaken) {
                 System.out.println("Username already exists");
                 result.add("Username already exists");
@@ -107,7 +101,8 @@ public class SparkDirectory {
         });
 
         post("/api/log-in", (req,res) -> { //TODO
-            var result = new SignUpResultDto(false, "Not implemented");
+            var result = new SignUpResultDto(true);
+
             return gson.toJson(result);
         });
 
