@@ -53,7 +53,6 @@ public class UserDao implements BaseDao<BaseUserDto> {
 
         System.out.println(docs);
         for(Document doc:docs) {
-            System.out.println("here docs");
             System.out.println(doc);
             BasicUser user = BasicUser.fromDocument(doc);
             all.add(user);
