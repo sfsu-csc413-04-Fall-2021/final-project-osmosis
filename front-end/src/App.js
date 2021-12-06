@@ -5,11 +5,13 @@ import { Link, Switch, Route} from 'react-router-dom';
 import Login from './Login';
 import Logout from './Logout';
 import SignUp from './SignUp';
+import SignedInPage from './SignedInPage';
 
 
 function App() {  
 
   return (
+
     <div >
 
       <div>
@@ -44,6 +46,7 @@ function App() {
         <Route path ="/Logout">  <Logout />  </Route>
         <Route path = "/SignUp"> <SignUp /> </Route>
         <Route path = "/"></Route>
+        <Route path = "/SignedInPage"> <SignedInPage /> </Route>
         
       </Switch>
 

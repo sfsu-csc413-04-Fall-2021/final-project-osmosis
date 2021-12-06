@@ -2,6 +2,13 @@ import React from "react";
 import "./SignUp.css";
 import { Link, Switch, Route} from 'react-router-dom';
 
+//import MakePayment from './MakePayment';
+//import Logout from './Logout';
+//import Transactions from './Transactions';
+//import Login from './Login';
+
+//import SignedInPage from './SignedInPage';
+
 function SignUp() {
 
     const [user,setUser]= React.useState('');
@@ -102,9 +109,10 @@ function SignUp() {
                 </div>
                 </div>
             </div>
-        </div>
 
         
+
+        </div>
     );
     
 
@@ -113,3 +121,13 @@ function SignUp() {
 
 
 export default SignUp;
+/*<Switch>
+        
+        <Route path ="/Logout">  <Logout />  </Route>
+        <Route path = "/MakePayment"> <MakePayment /> </Route>
+        <Route path ="/Login">  <Login />  </Route>
+        <Route path ="/Logout">  <Logout />  </Route>
+        <Route path = "/SignUp"> <SignUp /> </Route>
+        <Route path = "/"></Route>
+        
+</Switch>*/

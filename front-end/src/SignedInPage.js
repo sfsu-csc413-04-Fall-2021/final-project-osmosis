@@ -4,7 +4,10 @@ import { Link, Switch, Route} from 'react-router-dom';
 
 import MakePayment from './MakePayment';
 import Logout from './Logout';
-import Transactions from './Transactions';
+//import Transactions from './Transactions';
+import Login from './Login';
+import SignUp from './SignUp';
+import App from './App';
 
 
 function SignedInPage() {  
@@ -43,7 +46,10 @@ function SignedInPage() {
         
         <Route path ="/Logout">  <Logout />  </Route>
         <Route path = "/MakePayment"> <MakePayment /> </Route>
-        
+        <Route path ="/Login">  <Login />  </Route>
+        <Route path ="/Logout">  <Logout />  </Route>
+        <Route path = "/SignUp"> <SignUp /> </Route>
+        <Route path = "/"></Route>
         
       </Switch>
 
@@ -52,6 +58,6 @@ function SignedInPage() {
   );
 }
 
-export default App;
+export default SignedInPage;
 //<Route path = "/"></Route>
 //<Route path ="/Transactions">  <Transactions />  </Route>

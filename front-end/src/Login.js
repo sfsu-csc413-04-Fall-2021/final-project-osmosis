@@ -2,7 +2,12 @@ import React from "react";
 import "./Login.css";
 import { Link, Switch, Route} from 'react-router-dom';
 
+/*import MakePayment from './MakePayment';
+import Logout from './Logout';
+import Transactions from './Transactions';
+import SignUp from './SignUp';*/
 
+import SignedInPage from './SignedInPage';
 
 function Login() {
 
@@ -23,10 +28,11 @@ function Login() {
         body: JSON.stringify(body),
     };
     fetch('/api/log-in', settings)
-  
-  
+    
     };
-  
+    const myRedirect=()=>{
+      window.location.replace("http://localhost:3000/SignedInPage")
+  }
   
   
   return (
@@ -53,22 +59,25 @@ function Login() {
             </br>
             <br>
             </br>
-            
-  
-            
-            <Link to= "SignedInPage">
-                        <button onClick={myHandler} >Enter</button> 
-                        </Link>
+
+            <Link to= "/SignedInPage">
+                <button onClick={myHandler} >Enter</button> 
+            </Link>
+
+            <Switch>
+            <Route path ="/SignedInPage"> <SignedInPage /> </Route>
+            </Switch>
+
+
           </div>
           </div>
           
           
     
   </div>
+    
         
       </div>
-        
-  
        
         
     
@@ -76,4 +85,30 @@ function Login() {
 }
 
 export default Login;
+//<button onClick={myHandler} onClick={myRedirect} >Enter</button>
 //<button onClick={myHandler}>Enter</button>
+/*<Switch>
+        
+        <Route path ="/Logout">  <Logout />  </Route>
+        <Route path = "/MakePayment"> <MakePayment /> </Route>
+        <Route path ="/Login">  <Login />  </Route>
+        <Route path ="/Logout">  <Logout />  </Route>
+        <Route path = "/SignUp"> <SignUp /> </Route>
+        <Route path = "/"></Route>
+        
+      </Switch>*/
+
+     /* <nav> 
+      <Link to= "./SignedInPage.js">
+      </Link>
+      </nav>
+
+      <Switch>
+        
+        <Route path ="/SignedInPage">  <SignedInPage />  </Route>
+        
+      </Switch>
+      
+      <Link to= 'SignedInPage'>
+                        <button onClick={myHandler} onClick={myRedirect} >Enter</button> 
+            </Link>*/
