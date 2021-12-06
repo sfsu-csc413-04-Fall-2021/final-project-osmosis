@@ -9,6 +9,9 @@ function SignUp() {
     const [repassword, setRePassword]= React.useState('');
     const [result, setResult] = React.useState(null);
   
+    setCookie(user);
+    console.log(getCookie(user));
+    
     const myHandler= () => {
           var ABC = new RegExp(
               "(?=.*[A-Z])"
@@ -52,6 +55,38 @@ function SignUp() {
     console.log( 'Username= '+ user);
     console.log( 'Password= ' + password);
     console.log( 'RePassword= '+ repassword)
+
+    function setCookie(username){
+        const d = new Date();
+        d.setTime(d.getTime() +(10*24*60*60*1000));
+        let expires = "expires" + d.toUTCString();
+        document.cookie = user +  "=" + user + ";" + ";path=/";
+      }
+      function getCookie(username){
+        let name = user + "=";
+        let c1 = document.cookie.split(';');
+        for (let i =0; i <c1.length; i++){
+          let c = c1[i];
+          while (c.charAt(0) == ' '){
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0){
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+  
+      function checkCookie(){
+        let user = getCookie(user);
+        if (user !=""){
+          console.log("session active")
+          return true;
+        }else{
+          console.log("session over")
+          return false;
+        }
+      }
         }
         
         
