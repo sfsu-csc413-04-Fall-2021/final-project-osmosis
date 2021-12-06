@@ -1,11 +1,11 @@
 import React from "react";
 import "./MakePayment.css";
 
-function MakePayment(){
+function MakePayment() {
     const [recipient, setRecipient] = React.useState('');
     const [amount, setAmount] = React.useState('');
 
-    const myHandlerRequest= () => {
+    const myHandlerRequest = () => {
         const body = {
             recipient: recipient,
             amount: amount
@@ -22,7 +22,7 @@ function MakePayment(){
             recipient: recipient,
             amount: amount
         };
-        const settings ={
+        const settings = {
             method: 'post',
             body: JSON.stringify(body)
         };
@@ -30,14 +30,27 @@ function MakePayment(){
     };
 
     return (
-        <div className="form">
-            <div className="contents">
-                <div className="title">Username</div>
-                <input value={recipient} onChange={(a) => setRecipient(a.target.value)}>Enter Username</input>
-                <div className="title">Amount</div>
-                <input value={amount} onChange={(a) => setAmount(a.target.value)}>Enter Amount</input>   
-                <button onClick={myHandlerSend}>Send</button>
-                <button onClick={myHandlerRequest}>Requesting</button>         
+        <div className="makepaymentbox">
+            <div className="form">
+                <div className="contents">
+                    <h2>Lets Make a Payment</h2>
+                    <div className="title">
+                    <label>Enter Username</label>
+                    <br></br>
+                    <input value={recipient} onChange={(a) => setRecipient(a.target.value)} className="userName-Input"></input>
+                    </div>
+                    <br></br>
+
+                    <div className="title">
+                    <label>Enter Amount</label>
+                    <br></br>
+                    <input value={amount} onChange={(a) => setAmount(a.target.value)} className="userName-Input"></input>
+                    </div>
+                    <br></br>
+
+                    <button onClick={myHandlerSend}>Send</button>
+                    <button onClick={myHandlerRequest}>Request</button>
+                </div>
             </div>
         </div>
     );

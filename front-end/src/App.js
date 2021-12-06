@@ -6,6 +6,7 @@ import Login from './Login';
 import Logout from './Logout';
 import SignUp from './SignUp';
 import SignedInPage from './SignedInPage';
+import Transactions from './Transactions';
 
 
 function App() {  
@@ -47,6 +48,7 @@ function App() {
         <Route path = "/SignUp"> <SignUp /> </Route>
         <Route path = "/"></Route>
         <Route path = "/SignedInPage"> <SignedInPage /> </Route>
+        <Route path = "/Transactions"> <Transactions /> </Route>
         
       </Switch>
 

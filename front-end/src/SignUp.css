@@ -10,22 +10,13 @@
     text-align: center;
     box-shadow: 5px 10px 50px rgb(160, 156, 158);
     
-    
-
-
-    
-
 }
 
 .contents{
   position:relative;
   left: 50%;
   top: 40%;
-  transform: translate(-50%, -50%);
-
-
- 
-  
+  transform: translate(-50%, -50%);  
 }
 
 .userName-input{

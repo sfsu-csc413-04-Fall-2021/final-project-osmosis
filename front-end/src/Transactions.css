@@ -1,4 +1,4 @@
-.div-1{
+.transactionsbox{
     border-radius: 5px;
     background-color:#14365d93;
     width: 350px;
@@ -10,10 +10,18 @@
     text-align: center;
     box-shadow: 5px 10px 50px rgb(160, 156, 158);
     
-    
 }
 
-.button1{
-    font-size: 15px;
-    box-shadow: 5px 10px 50px rgb(255, 255, 255);
-}
+.contents{
+    position:relative;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    
+  }
+
+  .title{
+    background-color: rgba(206, 197, 197, 0.514);
+    border-radius: 25px;
+  
+} 
