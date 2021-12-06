@@ -4,7 +4,6 @@ import { Link, Switch, Route} from 'react-router-dom';
 
 import MakePayment from './MakePayment';
 import Logout from './Logout';
-//import Transactions from './Transactions';
 
 
 function Default() {  

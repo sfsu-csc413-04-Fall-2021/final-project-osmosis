@@ -76,6 +76,8 @@ function SignUp() {
                 console.log(data);
                 if (data.isSuccess) {
                     setResult(true);
+                    setCookie(user);
+                    window.location.replace('../');
                 } else {
                     setResult(data.error);
                 }
@@ -152,9 +154,7 @@ function SignUp() {
                         <br>
                         </br>
 
-                        <Link to="SignedInPage">
                             <button onClick={myHandler} >Submit</button>
-                        </Link>
                     </div>
                 </div>
             </div>

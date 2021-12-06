@@ -34,7 +34,18 @@ function Login() {
       body: JSON.stringify(body),
     };
     fetch('/api/log-in', settings)
-
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.isSuccess) {
+          setResult(true);
+          setCookie(user);
+          window.location.replace('../');
+        } else {
+          setResult(data.error);
+        }
+      })
+      .catch(console.log);
 
   };
 
@@ -95,11 +106,7 @@ function Login() {
             <br>
             </br>
 
-
-
-            <Link to="SignedInPage">
-              <button onClick={myHandler} >Enter</button>
-            </Link>
+            <button onClick={myHandler} >Enter</button>
           </div>
         </div>
 
