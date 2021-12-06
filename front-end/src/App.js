@@ -7,6 +7,7 @@ import Logout from './Logout';
 import SignUp from './SignUp';
 import SignedInPage from './SignedInPage';
 import Default from './Default';
+import Transactions from './Transactions';
 
 function Header(props) {
   const isLoggedIn = props.isLoggedIn;
