@@ -16,20 +16,43 @@ function SignUp() {
     const [repassword, setRePassword]= React.useState('');
     const [result, setResult] = React.useState(null);
   
+    setCookie(user);
+    console.log(getCookie);
     const myHandler= () => {
           var ABC = new RegExp(
               "(?=.*[A-Z])"
+          );
+          var one = new RegExp(
+              "(?=.*\\d)"
           );
     
         if(ABC.test(user)){
         } else{ 
             window.alert("Username has to have an Uppercased letter")
+            return false;
         }
         if(user.length<=6) {
-            window.alert("Username must be 6 or more characters")
+            window.alert("Username must be more than 6 characters")
+            return false;
         
-        }if(password!=repassword){
+        } if(ABC.test(password)){
+        }else{
+            window.alert("Password must contain a Uppercase letter.")
+            return false;
+            
+    
+        }if(password.length<=6){
+            window.alert("Password must be more than 6 characters")
+            return false;
+        }if(one.test(password)){
+        }else{
+        window.alert("Password must contain one numeric value")
+        return false;
+         }
+        if(password!=repassword){
             window.alert("Passwords do not match")
+            return false;
+        
         }else{
         
     
@@ -38,6 +61,8 @@ function SignUp() {
     console.log( 'Username= '+ user);
     console.log( 'Password= ' + password);
     console.log( 'RePassword= '+ repassword)
+
+    
         }
         
         
@@ -68,6 +93,37 @@ function SignUp() {
 
   };
 
+  function setCookie(username){
+    const d = new Date();
+    d.setTime(d.getTime() +(10*24*60*60*1000));
+    let expires = "expires" + d.toUTCString();
+    document.cookie = user +  "=" + user + ";" + ";path=/";
+  }
+  function getCookie(username){
+    let name = user + "=";
+    let c1 = document.cookie.split(';');
+    for (let i =0; i <c1.length; i++){
+      let c = c1[i];
+      while (c.charAt(0) == ' '){
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0){
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  function checkCookie(){
+    let user = getCookie(user);
+    if (user !=""){
+      console.log("session active")
+      return true;
+    }else{
+      console.log("session over")
+      return false;
+    }
+  }
     return(
 
 
@@ -96,7 +152,7 @@ function SignUp() {
                     <label>Re-enter Password</label>
                     <br>
                     </br>
-                    <input type="repassword" value={repassword} onChange={(e) => setRePassword(e.target.value)} className="userName-input">
+                    <input type="password" value={repassword} onChange={(e) => setRePassword(e.target.value)} className="userName-input">
                     </input>
                     <br>
                     </br>
