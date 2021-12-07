@@ -26,7 +26,16 @@ function Transactions() {
 
     return (
         <div className="transactionsbox">
-            <button onClick={closeBox}>Close</button>
+            <div className="contents">
+                <h2>Transactions</h2>
+                <div className = "title">
+                <label>Username:       Account Balance:</label>
+                </div>
+                <div className="prevtrans">
+
+                </div>
+                <button onClick={closeBox}>Close</button>
+            </div>
         </div>
 
     );

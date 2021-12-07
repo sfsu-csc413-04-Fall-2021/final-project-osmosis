@@ -8,6 +8,7 @@ import SignUp from './SignUp';
 import SignedInPage from './SignedInPage';
 import Default from './Default';
 import Transactions from './Transactions';
+import MakePayment from './MakePayment';
 
 function Header(props) {
   const isLoggedIn = props.isLoggedIn;
@@ -73,10 +74,9 @@ function App() {
         <Route path ="/Login">  <Login />  </Route>
         <Route path ="/Logout">  <Logout />  </Route>
         <Route path = "/SignUp"> <SignUp /> </Route>
-        <Route path = "/"></Route>
-        <Route path = "/SignedInPage"> <SignedInPage /> </Route>
         <Route path = "/Transactions"> <Transactions /> </Route>
-        
+        <Route path = "/MakePayment"> <MakePayment /> </Route>
+        <Route path = "/"></Route>
       </Switch>
 
     </div>

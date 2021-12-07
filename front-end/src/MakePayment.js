@@ -1,5 +1,5 @@
 import React from "react";
-import "./MakePayment.css";
+import './MakePayment.css';
 
 function MakePayment() {
     const [recipient, setRecipient] = React.useState('');
@@ -35,16 +35,15 @@ function MakePayment() {
                 <div className="contents">
                     <h2>Lets Make a Payment</h2>
                     <div className="title">
-                    <label>Enter Username</label>
-                    <br></br>
-                    <input value={recipient} onChange={(a) => setRecipient(a.target.value)} className="userName-Input"></input>
-                    </div>
+                        <label>Enter Username</label>
+                        <br></br>
+                        <input value={recipient} onChange={(a) => setRecipient(a.target.value)} className="userName-Input"></input>
+                    
                     <br></br>
 
-                    <div className="title">
-                    <label>Enter Amount</label>
-                    <br></br>
-                    <input value={amount} onChange={(a) => setAmount(a.target.value)} className="userName-Input"></input>
+                        <label>Enter Amount</label>
+                        <br></br>
+                        <input value={amount} onChange={(a) => setAmount(a.target.value)} className="userName-Input"></input>
                     </div>
                     <br></br>
 

@@ -1,14 +1,14 @@
 .form{
-    border-radius: 5px;
-    background-color:#14365d93;
-    width: 350px;
-    height: 250px;
-    padding: 4px;
-    border: rgb(26, 22, 22);
-    
-    margin: 250px auto auto auto;
-    text-align: center;
-    box-shadow: 5px 10px 50px rgb(160, 156, 158);
+  border-radius: 5px;
+  background-color:#14365d93;
+  width: 350px;
+  height: 250px;
+  padding: 4px;
+  border: rgb(26, 22, 22);
+  
+  margin: 250px auto auto auto;
+  text-align: center;
+  box-shadow: 5px 10px 50px rgb(160, 156, 158);
     
 }
 
@@ -17,11 +17,9 @@
     left: 50%;
     top: 40%;
     transform: translate(-50%, -50%);
-    
   }
 
   .userName-input{
-    background-color: rgba(206, 197, 197, 0.514);
-    border-radius: 25px;
+        border-radius: 25px;
   
 } 

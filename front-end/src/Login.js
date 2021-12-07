@@ -1,6 +1,7 @@
 import React from "react";
 import "./Login.css";
 import { Link, Switch, Route } from 'react-router-dom';
+//import * as $ from "jquery";
 
 /*import MakePayment from './MakePayment';
 import Logout from './Logout';
@@ -8,23 +9,18 @@ import Transactions from './Transactions';
 import SignUp from './SignUp';*/
 
 import SignedInPage from './SignedInPage';
+import Cookies from 'js-cookie'
+
+
 
 function Login() {
 
 
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
-  setCookie(user);
+  const [result, setResult] = React.useState(null);
   console.log(getCookie(user));
-  // jQuery(window).load(function(){
-  //   sessionStorage.setItem('status', 'loggedIn')
-  // }); // if we could use jQuery,
-  // if (sessionStorage.getItem('status' !=null))    sessionStorage.getItem('status' != null) can be called from anywhere.
-  // session is good
-  // else{
-  // session is bad
-  // }
-  // 
+  
   const myHandler = () => {
 
     console.log('Username= ' + user);
@@ -43,16 +39,28 @@ function Login() {
       .then(data => {
         console.log(data);
         if (data.isSuccess) {
-          setResult(true);
-          setCookie(user);
-          window.location.replace('../');
+         // setResult(true);
+          Cookies.set(user, true, {expires: 7, path: 'SignedInPage'});
+          console.log(Cookies.get(user)); // Should print true
+          window.location.replace('./SignedInPage');
         } else {
-          setResult(data.error);
+         // setResult(data.error);
+         window.location.replace('./Login');
         }
       })
       .catch(console.log);
 
   };
+  // jQuery method should work just be using sessionStorage.getItem();
+  // Problem with jQuery is it is not compatible with multiple users, it just determines if user is logged in.
+  // $(window).on('load', function(){
+  //   sessionStorage.setItem('status', 'loggedIn')
+  // });
+  // if (sessionStorage.getItem('status' !=null)){
+  // }     
+  // else{
+  // }
+  
 
   function setCookie(username) {
     const d = new Date();
@@ -156,3 +164,42 @@ export default Login;
       <Link to= 'SignedInPage'>
                         <button onClick={myHandler} onClick={myRedirect} >Enter</button> 
             </Link>*/
+
+
+// Doesn't work because Kerberos won't install properly.
+// var express = require('express');
+// var session = require('express-session');
+// var MongoDBStore = require('connect-mongodb-session')(session);
+
+// var app = express();
+// var store = new MongoDBStore(
+//   {
+//     uri: 'mongodb://bad.host:27000/Osmosis?connectTimeoutMS=10',
+//     databaseName: 'Osmosis',
+//     collection: 'mySessions'
+//   },
+//   function(error) {
+//     // Should have gotten an error
+//   });
+
+// store.on('error', function(error) {
+//   // Also get an error here
+// });
+
+// app.use(session({
+//   secret: 'This is a secret',
+//   cookie: {
+//     maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+//   },
+//   store: store,
+//   resave: true,
+//   saveUninitialized: false
+// }));
+
+// app.get('/', function(req, res) {
+//   res.send('Hello ' + JSON.stringify(req.session));
+// });
+
+// app.listen(3000);
+
+
