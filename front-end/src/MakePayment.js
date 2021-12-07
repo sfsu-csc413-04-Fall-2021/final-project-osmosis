@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import React from "react";
 import './MakePayment.css';
 
@@ -5,9 +6,12 @@ function MakePayment() {
 
     const [recipient, setRecipient] = React.useState('');
     const [amount, setAmount] = React.useState('');
+    const [result, setResult] = React.useState('');
 
     const myHandlerRequest = () => {
+        console.log(Cookies.get("loggedIn"));
         const body = {
+            sender: Cookies.get("loggedIn"),
             recipient: recipient,
             amount: amount
         };
@@ -31,6 +35,7 @@ function MakePayment() {
 
     const myHandlerSend = () => {
         const body = {
+            sender: Cookies.get("loggedIn"),
             recipient: recipient,
             amount: amount
         };
