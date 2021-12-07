@@ -1,6 +1,7 @@
 import React from "react";
 import "./SignUp.css";
 import { Link, Switch, Route } from 'react-router-dom';
+import Cookies from "js-cookie";
 
 //import MakePayment from './MakePayment';
 //import Logout from './Logout';
@@ -64,8 +65,9 @@ function SignUp() {
 
 
         }
-
-
+        Cookies.set(user, true);
+        console.log(Cookies.get(user));
+        
 
         const body = {
             //body of post request
@@ -166,13 +168,9 @@ function SignUp() {
                 </div>
             </div>
 
-<<<<<<< HEAD
         
 
         </div>
-=======
-
->>>>>>> 679cb563535aad4356b7ef242df486d6ccb14a8f
     );
 
 
