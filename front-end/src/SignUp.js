@@ -166,13 +166,9 @@ function SignUp() {
                 </div>
             </div>
 
-<<<<<<< HEAD
         
 
         </div>
-=======
-
->>>>>>> 679cb563535aad4356b7ef242df486d6ccb14a8f
     );
 
 

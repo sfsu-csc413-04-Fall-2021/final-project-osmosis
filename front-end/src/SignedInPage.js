@@ -15,6 +15,7 @@ function SignedInPage() {
   return (
 
     <div id="main">
+
       <Link to="/Transactions" class="headers">
         <div id="transactions" class="headers">Transactions</div>
       </Link>

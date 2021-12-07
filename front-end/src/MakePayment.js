@@ -1,4 +1,5 @@
 import React from "react";
+import "./MakePayment.css";
 
 function MakePayment() {
     const [recipient, setRecipient] = React.useState('');
