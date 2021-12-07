@@ -62,7 +62,7 @@ function App() {
 
       <nav>
 
-      <Header isLoggedIn={false}/>
+      <Header isLoggedIn={true}/>
 
       </nav>
 
@@ -71,14 +71,12 @@ function App() {
 
 
       <Switch>
-        <Route path ="/Login">  <Login />  </Route>
-        <Route path ="/Logout">  <Logout />  </Route>
+        <Route path = "/Login">  <Login />  </Route>
+        <Route path = "/Logout">  <Logout />  </Route>
         <Route path = "/SignUp"> <SignUp /> </Route>
-        <Route path = "/"></Route>
-        <Route path = "/SignedInPage"> <SignedInPage /> </Route>
         <Route path = "/Transactions"> <Transactions /> </Route>
         <Route path = "/MakePayment"> <MakePayment /> </Route>
-        
+        <Route path = "/"></Route>
       </Switch>
 
     </div>

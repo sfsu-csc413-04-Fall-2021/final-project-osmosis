@@ -1,7 +1,7 @@
 import React from "react";
 import "./Login.css";
 import { Link, Switch, Route } from 'react-router-dom';
-import * as $ from "jquery";
+// import * as $ from "jquery";
 
 /*import MakePayment from './MakePayment';
 import Logout from './Logout';

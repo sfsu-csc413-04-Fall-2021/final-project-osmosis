@@ -2,6 +2,7 @@ import React from "react";
 import './MakePayment.css';
 
 function MakePayment() {
+
     const [recipient, setRecipient] = React.useState('');
     const [amount, setAmount] = React.useState('');
 
@@ -26,7 +27,7 @@ function MakePayment() {
             method: 'post',
             body: JSON.stringify(body)
         };
-        fetch('/api/make-payment', settings)
+        fetch('/api/make-payment', settings);
     };
 
     return (
