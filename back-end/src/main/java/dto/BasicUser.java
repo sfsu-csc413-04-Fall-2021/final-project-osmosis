@@ -4,13 +4,13 @@ import org.bson.Document;
 
 public class BasicUser extends BaseUserDto {
 
-    private Double funds = 0.0;
+    private Double funds = 1000.0;
 
     public BasicUser() {
     }
 
     public BasicUser(String uniqueId, String user, String pass) {
-        this(uniqueId, user, pass, 0.0);
+        this(uniqueId, user, pass, 1000.0);
     }
 
     public BasicUser(String uniqueId, String user, String pass, Double amount) {
@@ -18,7 +18,7 @@ public class BasicUser extends BaseUserDto {
         username = user;
         password = pass;
         funds = amount;
-        if(amount == null) funds = 0.0;
+        if(amount == null) funds = 1000.0;
     }
 
     @Override

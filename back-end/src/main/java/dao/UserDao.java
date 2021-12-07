@@ -56,14 +56,19 @@ public class UserDao implements BaseDao<BaseUserDto> {
         List<BasicUser> all = new ArrayList<>();
         List<Document> docs = collection.find().into(new ArrayList<>());
 
-        System.out.println(docs);
         for(Document doc:docs) {
             System.out.println(doc);
             BasicUser user = BasicUser.fromDocument(doc);
             all.add(user);
-            System.out.println(user.getUsername());
-            System.out.println(doc);
         }
         return all;
+    }
+
+    public void addFunds(String user, Double amount) {
+
+    }
+
+    public void subtractFunds(String user, Double amount) {
+
     }
 }

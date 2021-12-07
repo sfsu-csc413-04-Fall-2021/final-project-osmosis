@@ -28,6 +28,9 @@ class SignUpResultDto {
 
     public void add(String error) {
         this.isSuccess = false;
+        if(error == null || error.length() == 0){
+            this.error = error;
+        }
         this.error += error + "; ";
     }
 }
@@ -101,7 +104,7 @@ public class SparkDirectory {
             return gson.toJson(result);
         });
 
-        post("/api/log-in", (req,res) -> { //TODO
+        post("/api/log-in", (req,res) -> {
             String body = req.body();
             System.out.println(body);
             SignUpResultDto result = new SignUpResultDto(true);
@@ -109,13 +112,11 @@ public class SparkDirectory {
             System.out.println(user.getUsername()+", "+user.getPassword()+", "+user.getConfirm());
             boolean userExists = UserDao.getInstance().getAll().stream()
                     .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(user.getUsername()));
-            System.out.println("here");
             if(!userExists) {
                 System.out.println("User not found");
                 result.add("User not found");
                 return gson.toJson(result);
             }
-            System.out.println("here 2");
             if(!user.getPassword().equals(UserDao.getInstance().getUser(user.getUsername()).getPassword())) {
                 System.out.println("Password incorrect");
                 result.add("Password incorrect");
@@ -132,11 +133,13 @@ public class SparkDirectory {
 
         post("/api/pay", (req,res) -> {
             String body = req.body();
-            SignUpResultDto result = new SignUpResultDto(true, null);
+            SignUpResultDto result = new SignUpResultDto(true);
             UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
 
-            BasicUser sender = (BasicUser) UserDao.getInstance().get(payment.getSender());
-            BasicUser recipient = (BasicUser) UserDao.getInstance().get(payment.getRecipient());
+            System.out.println(payment.getSender()+", "+payment.getRecipient());
+
+            BasicUser sender = UserDao.getInstance().getUser(payment.getSender());
+            BasicUser recipient = UserDao.getInstance().getUser(payment.getRecipient());
 
             boolean senderExists = UserDao.getInstance().getAll().stream()
                     .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(sender.getUsername()));
@@ -147,11 +150,23 @@ public class SparkDirectory {
                 result.add("At least one user not found");
                 return gson.toJson(result);
             }
+
+            if(sender.getUsername().equals(recipient.getUsername())) {
+                System.out.println("Cannot send money to yourself");
+                result.add("Cannot send money to yourself");
+                return gson.toJson(result);
+            }
+
             //Check if sender has enough funds
-            if(sender.getFunds() < payment.amount) {
-                //TODO if not enough funds, send user to "add funds screen"
+            if(UserDao.getInstance().getUser(sender.getUsername()).getFunds() < payment.amount) {
+                System.out.println("Not enough funds");
+                result.add("Not enough funds");
+                return gson.toJson(result);
             }
             //If everything is successful
+            System.out.println(payment);
+            UserDao.getInstance().addFunds(recipient.getUsername(), payment.amount);
+            UserDao.getInstance().subtractFunds(recipient.getUsername(), payment.amount);
             TransactionDao.getInstance().put(payment);
 
             return gson.toJson(result);
@@ -159,7 +174,7 @@ public class SparkDirectory {
 
         post("/api/request", (req,res) -> {
             String body = req.body();
-            SignUpResultDto result = new SignUpResultDto(true, null);
+            SignUpResultDto result = new SignUpResultDto(true);
             RequestTransaction payment = gson.fromJson(body, RequestTransaction.class);
 
             //check if valid sender, recipient
@@ -183,7 +198,7 @@ public class SparkDirectory {
 
         post("/api/accept", (req,res) -> {
             String body = req.body();
-            SignUpResultDto result = new SignUpResultDto(true, null);
+            SignUpResultDto result = new SignUpResultDto(true);
             RequestTransaction payment = gson.fromJson(body, RequestTransaction.class);
 
             //TODO check if request exists
@@ -221,7 +236,7 @@ public class SparkDirectory {
 
         post("/api/comment", (req,res) -> {
             String body = req.body();
-            SignUpResultDto result = new SignUpResultDto(true, null);
+            SignUpResultDto result = new SignUpResultDto(true);
             CommentDto comment = gson.fromJson(body, CommentDto.class);
 
             //TODO check if comment is valid length
@@ -232,7 +247,7 @@ public class SparkDirectory {
 
         get("/api/view-all", (req,res) -> { //TODO view all public transactions and logged-in user's private transactions
             String body = req.body();
-            SignUpResultDto result = new SignUpResultDto(true, null);
+            SignUpResultDto result = new SignUpResultDto(true);
             //TODO get current session user
             BaseUserDto user = gson.fromJson(body, BaseUserDto.class);
 
@@ -251,7 +266,7 @@ public class SparkDirectory {
 
         get("/api/view-transaction", (req,res) -> { //TODO view particular transaction
             String body = req.body();
-            SignUpResultDto result = new SignUpResultDto(true, null);
+            SignUpResultDto result = new SignUpResultDto(true);
             CommentDto comment = gson.fromJson(body, CommentDto.class);
 
             //TODO check if public or logged-in user's private transaction
@@ -261,18 +276,18 @@ public class SparkDirectory {
         });
 
         post("/api/set-privacy", (req,res) -> { //TODO set privacy of transaction, only for userToUser
-            var result = new SignUpResultDto(true, null);
+            var result = new SignUpResultDto(true);
             return gson.toJson(result);
         });
 
         post("/api/delete-comment", (req,res) -> { //TODO
-            var result = new SignUpResultDto(true, null);
+            var result = new SignUpResultDto(true);
             return gson.toJson(result);
         });
 
         get("/api/view-user", (req,res) -> { //TODO view all user's public transactions, if logged-in user, show private
             String body = req.body();
-            SignUpResultDto result = new SignUpResultDto(true, null);
+            SignUpResultDto result = new SignUpResultDto(true);
             CommentDto comment = gson.fromJson(body, CommentDto.class);
 
             return gson.toJson(result);
