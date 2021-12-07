@@ -5,15 +5,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import SignedInPage from './SignedInPage';
+import Default from './Default';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-<<<<<<< HEAD
-      <SignedInPage />
-=======
-      <App/>
->>>>>>> 679cb563535aad4356b7ef242df486d6ccb14a8f
+      <App />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
