@@ -30,6 +30,7 @@ public class UserToUserTransaction extends BaseTransactionDto {
             .append("completed", timeStamp)
             .append("privacy", privacy)
             .append("_id", getUniqueId());
+    System.out.println(doc);
     return doc;
   }
 

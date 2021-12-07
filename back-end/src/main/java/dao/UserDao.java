@@ -1,12 +1,16 @@
 package dao;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
 import dto.BaseTransactionDto;
 import dto.BaseUserDto;
 import dto.BasicUser;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +29,6 @@ public class UserDao implements BaseDao<BaseUserDto> {
 
     public static UserDao getInstance() {
         if (instance == null) {
-            System.out.println("here getInstance");
             instance = new UserDao(MongoConnection.getCollection("Users"));
         }
         return instance;
@@ -58,7 +61,6 @@ public class UserDao implements BaseDao<BaseUserDto> {
         List<Document> docs = collection.find().into(new ArrayList<>());
 
         for(Document doc:docs) {
-            System.out.println(doc);
             BasicUser user = BasicUser.fromDocument(doc);
             all.add(user);
         }
@@ -66,18 +68,33 @@ public class UserDao implements BaseDao<BaseUserDto> {
     }
 
     public void addFunds(String user, Double amount) {
-        BasicUser dated = getUser(user);
-        BasicDBObject newDocument =
-                new BasicDBObject().append("$inc",
-                        new BasicDBObject().append("funds", amount));
-        collection.updateOne(dated.toDocument(), newDocument);
+        System.out.println("Add funds");
+        Document oldUser = getUser(user).toDocument();
+        Bson updates = Updates.combine(
+                Updates.set("funds", (Double) oldUser.get("funds")+amount)
+        );
+        try {
+            UpdateResult result = collection.updateOne(oldUser, updates);
+            System.out.println("Modified document count: " + result.getModifiedCount());
+        } catch (MongoException me) {
+            System.err.println("Unable to update due to an error: " + me);
+        }
     }
 
     public void subtractFunds(String user, Double amount) {
-        BasicUser dated = getUser(user);
-        BasicDBObject newDocument =
-                new BasicDBObject().append("$inc",
-                        new BasicDBObject().append("funds", -amount));
-        collection.updateOne(dated.toDocument(), newDocument);
+        System.out.println("Subtracted funds");
+        Document oldUser = getUser(user).toDocument();
+        Bson updates = Updates.combine(
+                Updates.set("funds", (Double) oldUser.get("funds")-amount)
+        );
+        try {
+            UpdateResult result = collection.updateOne(oldUser, updates);
+            System.out.println("Modified document count: " + result.getModifiedCount());
+        } catch (MongoException me) {
+            System.err.println("Unable to update due to an error: " + me);
+        }
+//        BasicUser updatedUser = getUser(user);
+//        updatedUser.subtractFunds(amount);
+//        collection.updateOne(eq("username",user),updatedUser.toDocument());
     }
 }

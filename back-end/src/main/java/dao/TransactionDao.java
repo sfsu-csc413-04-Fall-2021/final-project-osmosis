@@ -22,6 +22,7 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
 
   public static TransactionDao getInstance() {
     if (instance == null) {
+      System.out.println("her getInstance Transaction");
       instance = new TransactionDao(MongoConnection.getCollection("Transactions"));
     }
     return instance;

@@ -36,12 +36,19 @@ public class BasicUser extends BaseUserDto {
                 document.get("username").toString(),
                 document.get("password").toString(),
                 (Double) document.get("funds"));
-        System.out.println(user.getUsername());
         return user;
     }
 
     public Double getFunds() {
         return funds;
+    }
+
+    public void addFunds(Double amount) {
+        funds += amount;
+    }
+
+    public void subtractFunds(Double amount) {
+        funds -= amount;
     }
 
 }
