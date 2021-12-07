@@ -71,7 +71,7 @@ public class UserDao implements BaseDao<BaseUserDto> {
         System.out.println("Add funds");
         Document oldUser = getUser(user).toDocument();
         Bson updates = Updates.combine(
-                Updates.set("funds", (Double) oldUser.get("funds")+amount)
+                Updates.set("funds", (Double) oldUser.get("funds") + amount)
         );
         try {
             UpdateResult result = collection.updateOne(oldUser, updates);
@@ -85,7 +85,7 @@ public class UserDao implements BaseDao<BaseUserDto> {
         System.out.println("Subtracted funds");
         Document oldUser = getUser(user).toDocument();
         Bson updates = Updates.combine(
-                Updates.set("funds", (Double) oldUser.get("funds")-amount)
+                Updates.set("funds", (Double) oldUser.get("funds") - amount)
         );
         try {
             UpdateResult result = collection.updateOne(oldUser, updates);
