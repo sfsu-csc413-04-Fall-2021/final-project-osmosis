@@ -12,6 +12,20 @@
     background-color: black;
 }
 
+.Popupcontent{
+    border-radius: 5px;
+    background-color:black;
+    width: 350px;
+    height: 250px;
+    padding: 4px;
+    border: rgb(26, 22, 22);
+    
+    margin: 250px auto auto auto;
+    text-align: center;
+    box-shadow: 5px 10px 50px white;
+      
+  }
+
 body{
     background-image: url('https://exchangerateiq.com/Riq/images/posts/posts_image/1593762776moneyfactor.jpg');
     justify-content: center;

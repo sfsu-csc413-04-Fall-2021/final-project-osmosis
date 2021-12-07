@@ -9,6 +9,7 @@ import SignedInPage from './SignedInPage';
 import Default from './Default';
 import Transactions from './Transactions';
 import MakePayment from './MakePayment';
+import PopUp from './PopUp';
 import Cookies from 'js-cookie';
 
 function Header(props) {
@@ -35,16 +36,13 @@ function App() {
       </nav>
       <div id="background"></div>
 
-
-
-
       <Switch>
         <Route path = "/Login">  <Login />  </Route>
         <Route path = "/Logout">  <Logout />  </Route>
         <Route path = "/SignUp"> <SignUp /> </Route>
         <Route path = "/Transactions"> <Transactions /> </Route>
         <Route path = "/MakePayment"> <MakePayment /> </Route>
-        <Route path = "/"></Route>
+        <Route path = "/"> <PopUp /> </Route>
       </Switch>
 
     </div>
