@@ -6,7 +6,11 @@ function MakePayment() {
 
     const [recipient, setRecipient] = React.useState('');
     const [amount, setAmount] = React.useState('');
+<<<<<<< HEAD
     const [result, setResult] = React.useState('');
+=======
+    const [result, setResult] = React.useState(null);
+>>>>>>> d6a1dfaf2254d11f3f82212734eaab3143c9865c
 
     const myHandlerRequest = () => {
         console.log(Cookies.get("loggedIn"));
