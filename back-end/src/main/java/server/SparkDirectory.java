@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import dao.TransactionDao;
 import dao.UserDao;
 import dto.*;
+import org.eclipse.jetty.server.Authentication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +102,25 @@ public class SparkDirectory {
         });
 
         post("/api/log-in", (req,res) -> { //TODO
-            var result = new SignUpResultDto(true);
+            String body = req.body();
+            System.out.println(body);
+            SignUpResultDto result = new SignUpResultDto(true);
+            BasicUser user = gson.fromJson(body, BasicUser.class);
+            System.out.println(user.getUsername()+", "+user.getPassword()+", "+user.getConfirm());
+            boolean userExists = UserDao.getInstance().getAll().stream()
+                    .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(user.getUsername()));
+            System.out.println("here");
+            if(!userExists) {
+                System.out.println("User not found");
+                result.add("User not found");
+                return gson.toJson(result);
+            }
+            System.out.println("here 2");
+            if(!user.getPassword().equals(UserDao.getInstance().getUser(user.getUsername()).getPassword())) {
+                System.out.println("Password incorrect");
+                result.add("Password incorrect");
+                return gson.toJson(result);
+            }
 
             return gson.toJson(result);
         });

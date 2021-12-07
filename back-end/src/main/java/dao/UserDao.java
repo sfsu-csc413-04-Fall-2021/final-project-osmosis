@@ -46,6 +46,11 @@ public class UserDao implements BaseDao<BaseUserDto> {
         return BaseUserDto.toDto(doc);
     }
 
+    public BasicUser getUser(String username) {
+        Document doc = collection.find(eq("username",username)).first();
+        return BasicUser.fromDocument(doc);
+    }
+
     @Override
     public List getAll() {
         List<BasicUser> all = new ArrayList<>();
