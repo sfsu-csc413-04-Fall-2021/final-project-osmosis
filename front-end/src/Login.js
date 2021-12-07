@@ -14,8 +14,9 @@ function Login() {
 
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
-  setCookie(user);
-  console.log(getCookie(user));
+  const [result, setResult] = React.useState(null);
+  // setCookie(user);
+  // console.log(getCookie(user));
   // jQuery(window).load(function(){
   //   sessionStorage.setItem('status', 'loggedIn')
   // }); // if we could use jQuery,

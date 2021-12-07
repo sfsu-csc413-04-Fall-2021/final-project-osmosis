@@ -9,11 +9,7 @@ import SignedInPage from './SignedInPage';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-<<<<<<< HEAD
-      <SignedInPage />
-=======
       <App/>
->>>>>>> 679cb563535aad4356b7ef242df486d6ccb14a8f
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
