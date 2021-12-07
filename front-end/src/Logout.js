@@ -1,15 +1,16 @@
 import React from "react";
 import "./Logout.css";
-
+import Cookies from 'js-cookie';
 
 function Logout(){
 
     const myRedirect=()=>{
-        window.location.replace("http://localhost:3000/")
+        window.location.replace("../")
+        Cookies.remove('loggedIn');
     }
 
     const noClicked=()=>{
-        window.location.replace("http://localhost:3000/SignedInPage")
+        window.location.replace("../")
     }
    
     return(

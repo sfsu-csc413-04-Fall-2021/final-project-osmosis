@@ -25,12 +25,12 @@ function SignedInPage() {
 
 export default SignedInPage;
 
-<Switch>
-        <Route path ="/Login">  <Login />  </Route>
-        <Route path ="/Logout">  <Logout />  </Route>
-        <Route path = "/SignUp"> <SignUp /> </Route>
-        <Route path = "/"></Route>
-        <Route path = "/SignedInPage"> <SignedInPage /> </Route>
-        <Route path = "/Transactions"> <Transactions /> </Route>
+// <Switch>
+//         <Route path ="/Login">  <Login />  </Route>
+//         <Route path ="/Logout">  <Logout />  </Route>
+//         <Route path = "/SignUp"> <SignUp /> </Route>
+//         <Route path = "/"></Route>
+//         <Route path = "/SignedInPage"> <SignedInPage /> </Route>
+//         <Route path = "/Transactions"> <Transactions /> </Route>
         
-      </Switch>
+//       </Switch>

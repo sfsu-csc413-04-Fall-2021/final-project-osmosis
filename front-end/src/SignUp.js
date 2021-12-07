@@ -66,7 +66,7 @@ function SignUp() {
 
         }
         Cookies.set("loggedIn", user, {expires: 7});  // 7day expirations session
-        console.log(Cookies.get("LoggedIn"));
+        console.log(Cookies.get("loggedIn"));
         
 
         const body = {

@@ -8,49 +8,18 @@ import SignUp from './SignUp';
 import SignedInPage from './SignedInPage';
 import Default from './Default';
 import Transactions from './Transactions';
+import MakePayment from './MakePayment';
 import Cookies from 'js-cookie';
+
 function Header(props) {
   const isLoggedIn = props.isLoggedIn;
-  if (Cookies.get() != null) {
+  if (isLoggedIn) {
     return <SignedInPage />;
   }
   return <Default />;
 }
 
 function App() {
-
-  function setCookie(username) {
-    if (username != ""){
-    const d = new Date();
-    d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
-    let expires = "expires" + d.toUTCString();
-    document.cookie = username + "=" + username + ";" + ";path=/";
-    }
-  }
-  function getCookie(username) {
-    let name = username + "=";
-    let c1 = document.cookie.split(';');
-    for (let i = 0; i < c1.length; i++) {
-      let c = c1[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-  function checkCookie() {
-    if (document.cookie != "") {
-      console.log("session active")
-      return true;
-    } else {
-      console.log("session over")
-      return false;
-    }
-  }
-
 
   return (
     <div >
@@ -61,7 +30,7 @@ function App() {
       </div>
       <nav>
 
-      <Header isLoggedIn={true}/>
+      <Header isLoggedIn={Cookies.get('loggedIn')}/>
 
       </nav>
       <div id="background"></div>
