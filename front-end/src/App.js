@@ -11,7 +11,7 @@ import Transactions from './Transactions';
 import Cookies from 'js-cookie';
 function Header(props) {
   const isLoggedIn = props.isLoggedIn;
-  if (Cookies.get !== "") {
+  if (Cookies.get() != null) {
     return <SignedInPage />;
   }
   return <Default />;

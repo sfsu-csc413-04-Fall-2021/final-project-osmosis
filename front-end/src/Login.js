@@ -18,9 +18,8 @@ function Login() {
 
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [result, setResult] = React.useState(null);
   console.log(getCookie(user));
-  
-
   
   const myHandler = () => {
 

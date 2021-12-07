@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import SignedInPage from './SignedInPage';
-import Default from './Default';
+import Default from './Default'
 
 ReactDOM.render(
   <React.StrictMode>
