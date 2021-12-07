@@ -1,6 +1,9 @@
 import React from "react";
+import Cookies from 'js-cookie';
+import "./Login.js"
 import "./Transactions.css";
 import { Link, Route, Switch } from 'react-router-dom';
+ 
 
 function Transactions() {
     const [username, checkUsername] = React.useState('');
@@ -20,20 +23,21 @@ function Transactions() {
         fetch('/api/tranctions', settings);
     };
 
+    function gettingInfo(){
+        Cookies.get('checkUsername', {path: Login.js}); //grabbing the username
+        Cookies.get('checkBalance', {path: Login.js}); //grabbing the balance on user
+    };
+
     const closeBox=()=>{
-        window.location.replace("http://localhost:3000/SignedInPage")
+        window.location.replace("http://localhost:3000/SignedInPage") //return to signedinpage if clicked no
     }
 
     return (
         <div className="transactionsbox">
             <div className="contents">
                 <h2>Transactions</h2>
-                <div className = "title">
-                <label>Username:       Account Balance:</label>
-                </div>
-                <div className="prevtrans">
-
-                </div>
+                <label>Username: Account Balance:</label>
+                
                 <button onClick={closeBox}>Close</button>
             </div>
         </div>

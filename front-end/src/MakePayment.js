@@ -34,17 +34,18 @@ function MakePayment() {
             <div className="form">
                 <div className="contents">
                     <h2>Lets Make a Payment</h2>
-                    <div className="title">
                         <label>Enter Username</label>
                         <br></br>
                         <input value={recipient} onChange={(a) => setRecipient(a.target.value)} className="userName-Input"></input>
                     
                     <br></br>
+                    <br></br>
 
                         <label>Enter Amount</label>
                         <br></br>
                         <input value={amount} onChange={(a) => setAmount(a.target.value)} className="userName-Input"></input>
-                    </div>
+                    
+                    <br></br>
                     <br></br>
 
                     <button onClick={myHandlerSend}>Send</button>
