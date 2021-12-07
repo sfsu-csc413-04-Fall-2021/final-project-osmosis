@@ -5,7 +5,6 @@ import dto.BaseTransactionDto;
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.CashTransaction;
 import dto.UserToUserTransaction;
 import org.bson.Document;
 
@@ -24,6 +23,7 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
     if (instance == null) {
       System.out.println("her getInstance Transaction");
       instance = new TransactionDao(MongoConnection.getCollection("Transactions"));
+      System.out.println("Passed");
     }
     return instance;
   }
@@ -49,18 +49,13 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
   }
 
   @Override
-  public List<BaseTransactionDto> getAll() {
-    List<BaseTransactionDto> all = new ArrayList<>();
+  public List getAll() {
+    List<UserToUserTransaction> all = new ArrayList<>();
     List<Document> docs = collection.find().into(new ArrayList<>());
 
-    System.out.println(docs);
     for(Document doc:docs) {
-      if(doc.get("type").equals("cash")) {
-        all.add(CashTransaction.fromDocument(doc));
-      } else if(doc.get("type").equals("credit")) {
-        all.add(UserToUserTransaction.fromDocument(doc));
-      }
-      System.out.println(doc);
+      UserToUserTransaction payment = UserToUserTransaction.fromDocument(doc);
+      all.add(payment);
     }
     return all;
   }

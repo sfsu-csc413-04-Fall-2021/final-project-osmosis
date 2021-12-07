@@ -4,7 +4,22 @@ import "./Login.js"
 import "./Transactions.css";
 import { Link, Route, Switch } from 'react-router-dom';
 import Login from "./Login.js";
- 
+
+function Transaction(props) {
+    return (
+        <div className="box">
+            <div className="sender">
+                {props.config.sender}
+            </div>
+            <div className="recipient">
+                {props.config.recipient}
+            </div>
+            <div className="amount">
+                {props.config.amount}
+            </div>
+        </div>
+    );
+}
 
 function Transactions() {
     const [username, checkUsername] = React.useState('');
@@ -24,44 +39,72 @@ function Transactions() {
         fetch('/api/tranctions', settings);
     };
 
-    function gettingInfo(){
+    function gettingInfo() {
         //Cookies.get(); //grabbing the username
         //Cookies.get('checkBalance', {path: Login.js}); grabbing the balance on user
         console.log(Cookies.get("loggedIn"));
     };
 
-    const closeBox=()=>{
+    const closeBox = () => {
         window.location.replace("http://localhost:3000/SignedInPage") //return to signedinpage if clicked no
     }
 
-
-    function eachTransaction(data, container){
-        let div = document.createElement("div");
-        div.id = "box";
-        let divChild1 = document.createElement("div");
-        divChild1 = "sender";
-        let divChild2 = document.createElement("div");
-        divChild2.id = "recipient";
-        let divChild3 = document.createElement("div");
-        divChild3.id = "amount";
-        
-    
-
-        div.appendChild(divChild1);
-        div.appendChild(divChild2);
-        container.appendChild(div);
-    }
-    function loadTransaction(){
-        let mainDiv = document.getElementById("container");
-        if (mainDiv){
-            fetch('api/view-all')
-            .then ((data) => data.json())
-            .then ((transaction => {
-                transaction.forEach(transaction =>  {
-                    eachTransaction(transaction, mainDiv)
+    class TransactionsList extends React.Component {
+        render() {
+            var array = this.props.PromiseResult
+            console.log("props"+this.props.transactions.length);
+            if (this.props.transactions) {
+                console.log(this.props.transactions);
+                var transactions = this.props.transactions.map(
+                    function (transaction) {
+                        console.log("object");
+                        console.log(transaction);
+                        return (
+                            <div className="box">
+                                <div className="sender">
+                                    {transaction.sender}
+                                </div>
+                                <div className="recipient">
+                                    {transaction.recipient}
+                                </div>
+                                <div className="amount">
+                                    {transaction.amount}
+                                </div>
+                            </div>
+                        );
                 });
-            }))
+                return (
+                    <div className="transactions">
+                        {transactions}
+                    </div>
+                );
+            }
         }
+    };
+    
+    function loadTransaction(username) {
+        var transactionsList = [];
+        const body = {
+            username: username
+        };
+        const settings = {
+            method: 'post',
+            body: JSON.stringify(body)
+        };
+        console.log("fetch");
+        return fetch('api/view-all', settings)
+            .then((data) => data.json())
+            .then((result => {
+                console.log("result");
+                console.log(result);
+                for(var i = 0;i < result.transactions.length;i++) {
+                    transactionsList.push(result.transactions.at(i));
+                }
+                return result;
+            }));
+        console.log("full list");
+        console.log(transactionsList);
+        return transactionsList;
     }
 
     return (
@@ -71,7 +114,7 @@ function Transactions() {
                 <label>Username: </label>
                 {Cookies.get("loggedIn")}
 
-                <div id="container">{loadTransaction()}</div>
+                <TransactionsList transactions={loadTransaction(Cookies.get("loggedIn"))} />
                 <br></br>
                 <button onClick={closeBox}>Close</button>
             </div>
@@ -88,7 +131,7 @@ export default Transactions;
                         <label>Username:</label>
                         {username}
                         <br></br>
-                    
+
 
                         <div className="title">
                         <label>Account Balance:</label>

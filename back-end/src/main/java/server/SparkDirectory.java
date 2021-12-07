@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import dao.TransactionDao;
 import dao.UserDao;
 import dto.*;
+import org.bson.Document;
 import org.eclipse.jetty.server.Authentication;
 
 import java.util.ArrayList;
@@ -65,7 +66,17 @@ class Validator {
     }
 }
 
+class ViewAllResultsDto {
+    List<Document> transactions;
 
+    public ViewAllResultsDto() {
+        transactions = new ArrayList<>();
+    }
+
+    public void add(Document doc) {
+        transactions.add(doc);
+    }
+}
 
 public class SparkDirectory {
 
@@ -259,11 +270,11 @@ public class SparkDirectory {
             return gson.toJson(result);
         });
 
-        get("/api/view-all", (req,res) -> { //TODO view all public transactions and logged-in user's private transactions
+        post("/api/view-all", (req,res) -> { //TODO view all public transactions and logged-in user's private transactions
+            System.out.println("View all");
             String body = req.body();
             SignUpResultDto result = new SignUpResultDto(true);
-            //TODO get current session user
-            BaseUserDto user = gson.fromJson(body, BaseUserDto.class);
+            BasicUser user = gson.fromJson(body, BasicUser.class);
 
             boolean userExists = UserDao.getInstance().getAll().stream()
                     .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(user.getUsername()));
@@ -273,9 +284,16 @@ public class SparkDirectory {
                 return gson.toJson(result);
             }
 
+            //found user
+            ViewAllResultsDto transResult = new ViewAllResultsDto();
 
+            for(Object transaction:TransactionDao.getInstance().getAll()) {
+                transResult.add(((UserToUserTransaction) transaction).toDocument());
+            }
 
-            return gson.toJson(result);
+            System.out.println(transResult);
+
+            return gson.toJson(transResult);
         });
 
         get("/api/view-transaction", (req,res) -> { //TODO view particular transaction

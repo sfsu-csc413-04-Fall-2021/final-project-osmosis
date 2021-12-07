@@ -31,6 +31,21 @@ public class AccountTransfer extends BaseTransactionDto {
         return doc;
     }
 
+    @Override
+    public String getSender() {
+        return null;
+    }
+
+    @Override
+    public String getRecipient() {
+        return null;
+    }
+
+    @Override
+    public Double getAmount() {
+        return null;
+    }
+
     public static AccountTransfer fromDocument(Document document){
         return new AccountTransfer((Double)document.get("amount"),
                 (String) document.get("recipient"),

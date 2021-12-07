@@ -32,7 +32,7 @@ public class RequestTransaction extends BaseTransactionDto {
     }
 
     public UserToUserTransaction complete() {
-        return new UserToUserTransaction(amount, recipientId, senderId, note, timeStamp, "public");
+        return new UserToUserTransaction(amount, recipientId, senderId, true, note, timeStamp, "public");
     }
 
     public static RequestTransaction fromDocument(Document document){
@@ -43,12 +43,20 @@ public class RequestTransaction extends BaseTransactionDto {
                 (String) document.get("sent"));
     }
 
+    public static RequestTransaction toDto(Document doc) {
+        return fromDocument(doc);
+    }
+
     public String getRecipient() {
         return recipientId;
     }
 
     public String getSender() {
         return senderId;
+    }
+
+    public Double getAmount() {
+        return amount;
     }
 
     public static String getType() {

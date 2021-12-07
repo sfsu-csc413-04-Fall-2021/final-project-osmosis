@@ -37,4 +37,8 @@ public abstract class BaseTransactionDto implements BaseDto {
         String doc = gson.toJson(document);
         return gson.fromJson(doc, BaseTransactionDto.class);
     }
+
+    public abstract String getSender();
+    public abstract String getRecipient();
+    public abstract Double getAmount();
 }
