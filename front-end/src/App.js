@@ -8,11 +8,10 @@ import SignUp from './SignUp';
 import SignedInPage from './SignedInPage';
 import Default from './Default';
 import Transactions from './Transactions';
-import MakePayment from './MakePayment';
-
+import Cookies from 'js-cookie';
 function Header(props) {
   const isLoggedIn = props.isLoggedIn;
-  if (isLoggedIn) {
+  if (Cookies.get() != null) {
     return <SignedInPage />;
   }
   return <Default />;
@@ -21,10 +20,12 @@ function Header(props) {
 function App() {
 
   function setCookie(username) {
+    if (username != ""){
     const d = new Date();
     d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
     let expires = "expires" + d.toUTCString();
     document.cookie = username + "=" + username + ";" + ";path=/";
+    }
   }
   function getCookie(username) {
     let name = username + "=";
@@ -50,23 +51,21 @@ function App() {
     }
   }
 
+
   return (
-
     <div >
-
       <div>
         <div id="title">
           <label>Welcome to Osmosis Payments</label>
         </div>
       </div>
-
       <nav>
 
       <Header isLoggedIn={true}/>
 
       </nav>
-
       <div id="background"></div>
+
 
 
 
