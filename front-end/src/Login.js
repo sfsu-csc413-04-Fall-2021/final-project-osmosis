@@ -19,7 +19,6 @@ function Login() {
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [result, setResult] = React.useState(null);
-  console.log(getCookie(user));
   
   
   
@@ -42,9 +41,9 @@ function Login() {
         console.log(data);
         if (data.isSuccess) {
          // setResult(true);
-          Cookies.set(Login, user, {expires: 7});  // 7day expirations session
-          console.log(Cookies.get(user)); // Should print true
-          window.location.replace('./SignedInPage');
+          Cookies.set("loggedIn", user, {expires: 7});  // 7day expirations session
+          console.log(Cookies.get("loggedIn")); // Should print true
+          window.location.replace('./');
         } else {
          // setResult(data.error);
          window.location.replace('./Login');
@@ -62,38 +61,6 @@ function Login() {
   // }     
   // else{
   // }
-
-  function setCookie(username) {
-    const d = new Date();
-    d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
-    let expires = "expires" + d.toUTCString();
-    document.cookie = user + "=" + user + ";" + ";path=/";
-  }
-  function getCookie(username) {
-    let name = user + "=";
-    let c1 = document.cookie.split(';');
-    for (let i = 0; i < c1.length; i++) {
-      let c = c1[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
-  function checkCookie() {
-    let user = getCookie(user);
-    if (user != "") {
-      console.log("session active")
-      return true;
-    } else {
-      console.log("session over")
-      return false;
-    }
-  }
 
   return (
     <div className="login-box" >

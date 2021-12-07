@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import "./Login.js"
 import "./Transactions.css";
 import { Link, Route, Switch } from 'react-router-dom';
+import Login from "./Login.js";
  
 
 function Transactions() {
@@ -24,8 +25,9 @@ function Transactions() {
     };
 
     function gettingInfo(){
-        Cookies.get('checkUsername', {path: Login.js}); //grabbing the username
-        Cookies.get('checkBalance', {path: Login.js}); //grabbing the balance on user
+        //Cookies.get(); //grabbing the username
+        //Cookies.get('checkBalance', {path: Login.js}); grabbing the balance on user
+        console.log(Cookies.get("loggedIn"));
     };
 
     const closeBox=()=>{
@@ -36,8 +38,9 @@ function Transactions() {
         <div className="transactionsbox">
             <div className="contents">
                 <h2>Transactions</h2>
-                <label>Username: Account Balance:</label>
-                
+                <label>Username: </label>
+                {Cookies.get("loggedIn")}
+                <br></br>
                 <button onClick={closeBox}>Close</button>
             </div>
         </div>
