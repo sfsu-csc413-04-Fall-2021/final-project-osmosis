@@ -21,6 +21,8 @@ function Login() {
   const [result, setResult] = React.useState(null);
   console.log(getCookie(user));
   
+  
+  
   const myHandler = () => {
 
     console.log('Username= ' + user);
@@ -40,7 +42,7 @@ function Login() {
         console.log(data);
         if (data.isSuccess) {
          // setResult(true);
-          Cookies.set(user, true, {expires: 7, path: 'SignedInPage'});
+          Cookies.set(user, user, {expires: 7});  // 7day expirations session
           console.log(Cookies.get(user)); // Should print true
           window.location.replace('./SignedInPage');
         } else {
@@ -60,7 +62,6 @@ function Login() {
   // }     
   // else{
   // }
-  
 
   function setCookie(username) {
     const d = new Date();
@@ -137,6 +138,7 @@ function Login() {
 }
 
 export default Login;
+
 //<button onClick={myHandler} onClick={myRedirect} >Enter</button>
 //<button onClick={myHandler}>Enter</button>
 /*<Switch>
