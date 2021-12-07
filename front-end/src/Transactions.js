@@ -59,7 +59,6 @@ function Transactions() {
             .then ((transaction => {
                 transaction.forEach(transaction =>  {
                     eachTransaction(transaction, mainDiv)
-                    
                 });
             }))
         }

@@ -1,5 +1,6 @@
 package dao;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import dto.BaseTransactionDto;
@@ -65,10 +66,18 @@ public class UserDao implements BaseDao<BaseUserDto> {
     }
 
     public void addFunds(String user, Double amount) {
-
+        BasicUser dated = getUser(user);
+        BasicDBObject newDocument =
+                new BasicDBObject().append("$inc",
+                        new BasicDBObject().append("funds", amount));
+        collection.updateOne(dated.toDocument(), newDocument);
     }
 
     public void subtractFunds(String user, Double amount) {
-
+        BasicUser dated = getUser(user);
+        BasicDBObject newDocument =
+                new BasicDBObject().append("$inc",
+                        new BasicDBObject().append("funds", -amount));
+        collection.updateOne(dated.toDocument(), newDocument);
     }
 }
