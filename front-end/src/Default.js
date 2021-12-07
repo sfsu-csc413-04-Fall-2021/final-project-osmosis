@@ -11,7 +11,6 @@ import SignUp from './SignUp';
 import SignedInPage from './SignedInPage';
 function Default() {  
 
-
   if (Cookies.get() !== null){
     return (
 

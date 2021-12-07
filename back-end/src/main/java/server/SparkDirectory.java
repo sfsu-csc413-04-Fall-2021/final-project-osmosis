@@ -191,6 +191,19 @@ public class SparkDirectory {
                 result.add("At least one user not found");
                 return gson.toJson(result);
             }
+
+            if(sender.getUsername().equals(recipient.getUsername())) {
+                System.out.println("Cannot request money from yourself");
+                result.add("Cannot request money from yourself");
+                return gson.toJson(result);
+            }
+
+            //If everything is successful
+            System.out.println(payment);
+            UserDao.getInstance().addFunds(recipient.getUsername(), payment.amount);
+            UserDao.getInstance().subtractFunds(recipient.getUsername(), payment.amount);
+            TransactionDao.getInstance().put(payment);
+
             //TODO add to TransactionDao
             TransactionDao.getInstance().put(payment);
 

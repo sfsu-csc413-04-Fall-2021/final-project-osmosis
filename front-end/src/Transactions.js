@@ -34,12 +34,44 @@ function Transactions() {
         window.location.replace("http://localhost:3000/SignedInPage") //return to signedinpage if clicked no
     }
 
+
+    function eachTransaction(data, container){
+        let div = document.createElement("div");
+        div.id = "box";
+        let divChild1 = document.createElement("div");
+        divChild1 = "sender";
+        let divChild2 = document.createElement("div");
+        divChild2.id = "recipient";
+        let divChild3 = document.createElement("div");
+        divChild3.id = "amount";
+        
+    
+
+        div.appendChild(divChild1);
+        div.appendChild(divChild2);
+        container.appendChild(div);
+    }
+    function loadTransaction(){
+        let mainDiv = document.getElementById("container");
+        if (mainDiv){
+            fetch('api/view-all')
+            .then ((data) => data.json())
+            .then ((transaction => {
+                transaction.forEach(transaction =>  {
+                    eachTransaction(transaction, mainDiv)
+                });
+            }))
+        }
+    }
+
     return (
         <div className="transactionsbox">
             <div className="contents">
                 <h2>Transactions</h2>
                 <label>Username: </label>
                 {Cookies.get("loggedIn")}
+
+                <div id="container">{loadTransaction()}</div>
                 <br></br>
                 <button onClick={closeBox}>Close</button>
             </div>
