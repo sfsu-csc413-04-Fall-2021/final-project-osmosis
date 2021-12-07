@@ -15,7 +15,18 @@ function MakePayment() {
             method: 'post',
             body: JSON.stringify(body)
         };
-        fetch('/api/make-payment', settings);
+        fetch('/api/request', settings)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          if (data.isSuccess) {
+           setResult(true);
+           window.location.replace('../Transactions');
+          } else {
+           setResult(data.error);
+          }
+        })
+        .catch(console.log);
     };
 
     const myHandlerSend = () => {
@@ -27,7 +38,18 @@ function MakePayment() {
             method: 'post',
             body: JSON.stringify(body)
         };
-        fetch('/api/make-payment', settings);
+        fetch('/api/pay', settings)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          if (data.isSuccess) {
+           setResult(true);
+           window.location.replace('../Transactions');
+          } else {
+           setResult(data.error);
+          }
+        })
+        .catch(console.log);
     };
 
     return (
