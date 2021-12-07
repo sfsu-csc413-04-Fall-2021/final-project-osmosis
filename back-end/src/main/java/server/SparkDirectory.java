@@ -167,8 +167,8 @@ public class SparkDirectory {
             System.out.println(payment);
             UserDao.getInstance().addFunds(recipient.getUsername(), payment.amount);
             UserDao.getInstance().subtractFunds(sender.getUsername(), payment.amount);
+            System.out.println(payment.toDocument());
             TransactionDao.getInstance().put(payment);
-            System.out.println("HEREHEHE");
 
             return gson.toJson(result);
         });
