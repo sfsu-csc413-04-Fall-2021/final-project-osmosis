@@ -92,7 +92,7 @@ function Transactions() {
             body: JSON.stringify(body)
         };
         console.log("fetch");
-        return fetch('api/view-all', settings)
+        fetch('api/view-all', settings)
             .then((data) => data.json())
             .then((result => {
                 console.log("result");
