@@ -177,6 +177,13 @@ public class SparkDirectory {
                 result.add("Not enough funds");
                 return gson.toJson(result);
             }
+
+            // Check if sender is sending a positive value
+            if(payment.amount < 0){
+                System.out.println("Cannot send a negative number");
+                result.add("Cannot send a negative number");
+                return gson.toJson(result);
+            }
             //If everything is successful
             System.out.println(payment);
             System.out.println(payment.toDocument());
