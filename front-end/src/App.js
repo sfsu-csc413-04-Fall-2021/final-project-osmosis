@@ -9,6 +9,7 @@ import SignedInPage from './SignedInPage';
 import Default from './Default';
 import Transactions from './Transactions';
 import MakePayment from './MakePayment';
+import MakeRequest from './MakeRequest';
 import PopUp from './PopUp';
 import Cookies from 'js-cookie';
 
@@ -42,6 +43,7 @@ function App() {
         <Route path = "/SignUp"> <SignUp /> </Route>
         <Route path = "/Transactions"> <Transactions /> </Route>
         <Route path = "/MakePayment"> <MakePayment /> </Route>
+        <Route path= "/MakeRequest"> <MakeRequest/></Route>
         <Route path = "/"> <PopUp /> </Route>
       </Switch>
 

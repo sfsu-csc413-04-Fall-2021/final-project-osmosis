@@ -14,6 +14,9 @@ function SignedInPage() {
       <Link to="/MakePayment" className="headers">
         <div id="makepayment" className="headers">Make a Payment</div>
       </Link>
+      <Link to="/MakeRequest" className="headers">
+        <div id="makerequest" className="headers">Make a Request</div>
+        </Link>
       <Link to="/Logout" className="headers">
         <div id="logout" className="headers">Log Out</div>
       </Link>

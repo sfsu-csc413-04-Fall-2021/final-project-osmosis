@@ -3,12 +3,12 @@
     padding-top: .35em;
     padding-bottom: .35em;
     display: grid;
-    gap: .1rem .3rem;
+    gap: .1rem 3rem;
     grid-template-rows: 1fr ;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto auto ;
     grid-template-areas: 
     "home signup login"
-    "logout tran payment";
+    "logout tran req payment";
     background-color: black;
 }
 
@@ -37,6 +37,9 @@ body{
 }
 #makepayment{
     grid-area: makepayment;
+}
+#makerequest{
+    grid-area: makerequest;
 }
 
 #logout{

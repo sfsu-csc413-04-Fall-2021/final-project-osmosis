@@ -8,30 +8,32 @@ function MakePayment() {
     const [amount, setAmount] = React.useState('');
     const [result, setResult] = React.useState('');
 
-    const myHandlerRequest = () => {
-        console.log(Cookies.get("loggedIn"));
-        const body = {
-            sender: Cookies.get("loggedIn"),
-            recipient: recipient,
-            amount: amount
-        };
-        const settings = {
-            method: 'post',
-            body: JSON.stringify(body)
-        };
-        fetch('/api/request', settings)
-        .then(res => res.json())
-        .then(data => {
-          console.log(data);
-          if (data.isSuccess) {
-           setResult(true);
-           window.location.replace('../Transactions');
-          } else {
-           setResult(data.error);
-          }
-        })
-        .catch(console.log);
-    };
+
+    //commented this out to move it to ./MakeRequest
+    // const myHandlerRequest = () => {
+    //     console.log(Cookies.get("loggedIn"));
+    //     const body = {
+    //         sender: Cookies.get("loggedIn"),
+    //         recipient: recipient,
+    //         amount: amount
+    // };
+    //     const settings = {
+    //         method: 'post',
+    //         body: JSON.stringify(body)
+    //     };
+    //     fetch('/api/request', settings)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       console.log(data);
+    //       if (data.isSuccess) {
+    //        setResult(true);
+    //        window.location.replace('../Transactions');
+    //       } else {
+    //        setResult(data.error);
+    //       }
+    //     })
+    //     .catch(console.log);
+    // };
 
     const myHandlerSend = () => {
         const body = {
@@ -77,7 +79,8 @@ function MakePayment() {
                     <br></br>
 
                     <button onClick={myHandlerSend}>Send</button>
-                    <button onClick={myHandlerRequest}>Request</button>
+                    {/* <button onClick={myHandlerRequest} >Request</button> */}
+                    
                 </div>
             </div>
         </div>
