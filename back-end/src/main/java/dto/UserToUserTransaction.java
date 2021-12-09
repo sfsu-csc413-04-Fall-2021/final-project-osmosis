@@ -1,6 +1,7 @@
 package dto;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 public class UserToUserTransaction extends BaseTransactionDto {
 
@@ -11,6 +12,7 @@ public class UserToUserTransaction extends BaseTransactionDto {
 
   public UserToUserTransaction(Double amount, String to, String from, Boolean complete, String note, String time, String privacy) {
     super();
+    setUniqueId(new ObjectId().toString());
     this.amount = amount;
     recipient = to;
     sender = from;
@@ -27,6 +29,7 @@ public class UserToUserTransaction extends BaseTransactionDto {
             .append("complete", complete)
             .append("recipient", recipient)
             .append("sender", sender)
+            .append("complete", complete)
             .append("note", note)
             .append("completed", timeStamp)
             .append("privacy", privacy)
@@ -65,8 +68,12 @@ public class UserToUserTransaction extends BaseTransactionDto {
     return complete;
   }
 
+  public void setComplete(Boolean complete) {
+    this.complete = complete;
+  }
+
   public String toString() {
-    return sender+" sent "+amount+" to "+recipient+" at "+timeStamp;
+    return "Transaction "+getUniqueId()+": "+sender+(complete ? " sent ":" wants to send ")+amount+" to "+recipient;
   }
 
 }
