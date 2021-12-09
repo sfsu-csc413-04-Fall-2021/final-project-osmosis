@@ -4,6 +4,7 @@
 
 # Setup project
 - `npm i` or `npm install` 
+ - `npm i js-cookie`
 - Start dev server with `npm start`
 
 # Routing
