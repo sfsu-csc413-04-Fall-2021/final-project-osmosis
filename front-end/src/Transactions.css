@@ -2,14 +2,16 @@
     border-radius: 10px;
     background-color:#14365d93;
     width: 350px;
-    height: 250px;
+    height: auto;
     padding: 4px;
     border: rgb(26, 22, 22);
     
-    margin: 250px auto auto auto;
+    margin: 200px auto auto auto;
+    padding-top: 50px;
     text-align: center;
     box-shadow: 5px 10px 50px rgb(160, 156, 158);
-    
+    display: grid;
+
 }
 
 .contents{
@@ -37,7 +39,7 @@
 }
 .sender{
   grid-area: sender;
-  border: grey solid 1px;
+  border: rgb(177, 163, 163) solid 1px;
   overflow-y: none;
   overflow-y: auto;
   color: white;
@@ -46,16 +48,17 @@
 
 .recipient{
   grid-area: recipient;
-  border: grey solid 1px;
+  border: rgb(177, 163, 163) solid 1px;
   overflow-y: none;
   overflow-y: auto;
   color: white;
+  
 
 }
 
 .amount{
   grid-area: amount;
-  border: grey solid 1px;
+  border: rgb(177, 163, 163) solid 1px;
   overflow-y: none;
   overflow-y: auto;
   color: white;
@@ -69,11 +72,21 @@
 }
 .recipientbox{
   grid-area: recipientbox;
+  font-weight: 400;
+  font-size: 20px;
+  color: white;
 }
 .senderbox{
   grid-area: senderbox;
+  font-weight: 400;
+  font-size: 20px;
+  color: white;
+
 }
 .amountbox{
   grid-area: amountbox;
+  font-weight: 400;
+  font-size: 20px;
+  color: white;
 }
 
