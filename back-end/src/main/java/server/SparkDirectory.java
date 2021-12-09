@@ -5,6 +5,7 @@ import dao.TransactionDao;
 import dao.UserDao;
 import dto.*;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.eclipse.jetty.server.Authentication;
 
 import java.util.ArrayList;
@@ -146,6 +147,8 @@ public class SparkDirectory {
             String body = req.body();
             SignUpResultDto result = new SignUpResultDto(true);
             UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
+            payment.setUniqueId(new ObjectId().toString());
+            payment.setComplete(true);
 
             System.out.println(payment.getSender()+", "+payment.getRecipient());
 
@@ -176,10 +179,10 @@ public class SparkDirectory {
             }
             //If everything is successful
             System.out.println(payment);
+            System.out.println(payment.toDocument());
+            TransactionDao.getInstance().putTransaction(payment);
             UserDao.getInstance().addFunds(recipient.getUsername(), payment.amount);
             UserDao.getInstance().subtractFunds(sender.getUsername(), payment.amount);
-            System.out.println(payment.toDocument());
-            TransactionDao.getInstance().put(payment);
 
             return gson.toJson(result);
         });
@@ -187,11 +190,15 @@ public class SparkDirectory {
         post("/api/request", (req,res) -> {
             String body = req.body();
             SignUpResultDto result = new SignUpResultDto(true);
-            RequestTransaction payment = gson.fromJson(body, RequestTransaction.class);
+            UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
+            payment.setUniqueId(new ObjectId().toString());
+            payment.setComplete(false);
+
+            System.out.println(payment);
 
             //check if valid sender, recipient
-            BasicUser sender = (BasicUser) UserDao.getInstance().get(payment.getSender());
-            BasicUser recipient = (BasicUser) UserDao.getInstance().get(payment.getRecipient());
+            BasicUser sender = UserDao.getInstance().getUser(payment.getSender());
+            BasicUser recipient = UserDao.getInstance().getUser(payment.getRecipient());
 
             boolean senderExists = UserDao.getInstance().getAll().stream()
                     .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(sender.getUsername()));
@@ -211,12 +218,7 @@ public class SparkDirectory {
 
             //If everything is successful
             System.out.println(payment);
-            UserDao.getInstance().addFunds(recipient.getUsername(), payment.amount);
-            UserDao.getInstance().subtractFunds(recipient.getUsername(), payment.amount);
-            TransactionDao.getInstance().put(payment);
-
-            //TODO add to TransactionDao
-            TransactionDao.getInstance().put(payment);
+            TransactionDao.getInstance().putTransaction(payment);
 
             return gson.toJson(result);
         });
@@ -227,7 +229,7 @@ public class SparkDirectory {
             RequestTransaction payment = gson.fromJson(body, RequestTransaction.class);
 
             //TODO check if request exists
-            boolean transactionExists = TransactionDao.getInstance().getAll().stream()
+            boolean transactionExists = TransactionDao.getInstance().getAllRequests().stream()
                     .anyMatch(transaction -> ((BaseTransactionDto) transaction).getUniqueId().equals(payment.getUniqueId()));
             if(!transactionExists) {
                 System.out.println("Transaction not found");
@@ -288,23 +290,28 @@ public class SparkDirectory {
             ViewAllResultsDto transResult = new ViewAllResultsDto();
 
             for(Object transaction:TransactionDao.getInstance().getAll()) {
+                System.out.println(((UserToUserTransaction) transaction).toDocument());
                 transResult.add(((UserToUserTransaction) transaction).toDocument());
             }
-
-            System.out.println(transResult);
 
             return gson.toJson(transResult);
         });
 
-        get("/api/view-transaction", (req,res) -> { //TODO view particular transaction
+        post("/api/view-transaction", (req,res) -> { //TODO view particular transaction
             String body = req.body();
             SignUpResultDto result = new SignUpResultDto(true);
-            CommentDto comment = gson.fromJson(body, CommentDto.class);
+            UserToUserTransaction transaction = gson.fromJson(body, UserToUserTransaction.class);
 
-            //TODO check if public or logged-in user's private transaction
-            //TODO display sender, recipient, amount (if user's), note, comments
+            boolean transactionExists = TransactionDao.getInstance().getAll().stream()
+                    .anyMatch(existingTrans ->
+                            ((UserToUserTransaction) existingTrans).getUniqueId().equals(transaction.getUniqueId()));
+            if(!transactionExists) {
+                System.out.println("Transaction not found");
+                result.add("Transaction not found");
+                return gson.toJson(result);
+            }
 
-            return gson.toJson(result);
+            return gson.toJson(transaction.toDocument());
         });
 
         post("/api/set-privacy", (req,res) -> { //TODO set privacy of transaction, only for userToUser
@@ -317,12 +324,20 @@ public class SparkDirectory {
             return gson.toJson(result);
         });
 
-        get("/api/view-user", (req,res) -> { //TODO view all user's public transactions, if logged-in user, show private
+        post("/api/view-user", (req,res) -> {
             String body = req.body();
             SignUpResultDto result = new SignUpResultDto(true);
-            CommentDto comment = gson.fromJson(body, CommentDto.class);
+            BasicUser user = gson.fromJson(body, BasicUser.class);;
 
-            return gson.toJson(result);
+            boolean userExists = UserDao.getInstance().getAll().stream()
+                    .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(user.getUsername()));
+            if(!userExists) {
+                System.out.println("User not found");
+                result.add("User not found");
+                return gson.toJson(result);
+            }
+
+            return gson.toJson(UserDao.getInstance().getUser(user.getUsername()).toDocument());
         });
 
     }

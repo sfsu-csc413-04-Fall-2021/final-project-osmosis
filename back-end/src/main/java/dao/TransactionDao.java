@@ -21,9 +21,7 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
 
   public static TransactionDao getInstance() {
     if (instance == null) {
-      System.out.println("her getInstance Transaction");
       instance = new TransactionDao(MongoConnection.getCollection("Transactions"));
-      System.out.println("Passed");
     }
     return instance;
   }
@@ -36,6 +34,10 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
   @Override
   public void put(BaseTransactionDto baseTransactionDto) {
     collection.insertOne(baseTransactionDto.toDocument());
+  }
+
+  public void putTransaction(UserToUserTransaction transaction) {
+    collection.insertOne(transaction.toDocument());
   }
 
   public void delete(BaseTransactionDto baseTransactionDto) {
@@ -51,9 +53,25 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
   @Override
   public List getAll() {
     List<UserToUserTransaction> all = new ArrayList<>();
-    List<Document> docs = collection.find().into(new ArrayList<>());
+    List<Document> requestDocs = collection.find(eq("complete",false)).into(new ArrayList<>());
+    List<Document> completeDocs = collection.find(eq("complete",true)).into(new ArrayList<>());
 
-    for(Document doc:docs) {
+    for(Document doc:requestDocs) {
+      UserToUserTransaction payment = UserToUserTransaction.fromDocument(doc);
+      all.add(payment);
+    }
+    for(Document doc:completeDocs) {
+      UserToUserTransaction payment = UserToUserTransaction.fromDocument(doc);
+      all.add(payment);
+    }
+    return all;
+  }
+
+  public List getAllRequests() {
+    List<UserToUserTransaction> all = new ArrayList<>();
+    List<Document> requestDocs = collection.find(eq("complete",false)).into(new ArrayList<>());
+
+    for(Document doc:requestDocs) {
       UserToUserTransaction payment = UserToUserTransaction.fromDocument(doc);
       all.add(payment);
     }
