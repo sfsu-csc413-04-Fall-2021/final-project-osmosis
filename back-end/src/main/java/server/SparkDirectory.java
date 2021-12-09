@@ -344,7 +344,7 @@ public class SparkDirectory {
                 return gson.toJson(result);
             }
 
-            return gson.toJson(UserDao.getInstance().getUser(user.getUsername()).toDocument());
+            return gson.toJson(UserDao.getInstance().getUser(user.getUsername()).getFunds());
         });
 
     }
