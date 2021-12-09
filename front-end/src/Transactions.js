@@ -8,7 +8,7 @@ import PopUp from "./PopUp.js";
 
 function Transaction(props) {
     return (
-        
+
         <div className="box">
             <div className="sender">
                 {props.sender}
@@ -41,6 +41,54 @@ class TransactionsList extends React.Component {
         }
     }
 };
+
+class UserInfo extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: null
+        };
+    }
+
+    componentWillMount() {
+        this.renderMyData();
+    }
+
+    renderMyData() {
+        const body = {
+            username: Cookies.get("loggedIn")
+        };
+        const settings = {
+            method: 'post',
+            body: JSON.stringify(body)
+        };
+        fetch('api/view-user', settings)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ data: responseJson })
+                console.log(responseJson);
+            })
+            .catch((error) => {
+                console.log("ERROR");
+                console.error(error);
+            });
+    }
+
+    render() {
+        return (
+            <div className="user-info">
+                <label>Username: </label>
+                {Cookies.get("loggedIn")}
+                <br />
+                <label>Account Balance: $</label>
+                {this.state.data ? this.state.data : <div />}
+                <br />
+            </div>
+        );
+    }
+}
 
 class Transactions extends React.Component {
 
@@ -84,15 +132,14 @@ class Transactions extends React.Component {
             <div className="transactionsbox">
                 <div className="contents">
                     <h2>Transactions</h2>
-                    <label>Username: </label>
-                    {Cookies.get("loggedIn")}
-                    <br />
+                    <UserInfo />
                     <div className="grid">
                         <div className="senderbox">Sender</div>
                         <div className="recipientbox">Recipient</div>
                         <div className="amountbox">Amount</div>
                     </div>
                     {this.state.data ? <TransactionsList data={this.state.data} /> : <PopUp />}
+                    <br />
                     <button onClick={closeBox}>Close</button>
                 </div>
             </div>
