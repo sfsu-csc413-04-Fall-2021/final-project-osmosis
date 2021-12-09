@@ -8,6 +8,7 @@ import PopUp from "./PopUp.js";
 
 function Transaction(props) {
     return (
+        
         <div className="box">
             <div className="sender">
                 {props.sender}
@@ -16,7 +17,7 @@ function Transaction(props) {
                 {props.recipient}
             </div>
             <div className="amount">
-                {props.amount}
+                ${props.amount}
             </div>
         </div>
     );
@@ -86,6 +87,11 @@ class Transactions extends React.Component {
                     <label>Username: </label>
                     {Cookies.get("loggedIn")}
                     <br />
+                    <div className="grid">
+                        <div className="senderbox">Sender</div>
+                        <div className="recipientbox">Recipient</div>
+                        <div className="amountbox">Amount</div>
+                    </div>
                     {this.state.data ? <TransactionsList data={this.state.data} /> : <PopUp />}
                     <button onClick={closeBox}>Close</button>
                 </div>

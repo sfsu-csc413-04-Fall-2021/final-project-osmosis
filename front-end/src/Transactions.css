@@ -25,3 +25,55 @@
     border-radius: 25px;
   
 } 
+
+.box{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-auto-rows: 1;
+  grid-auto-columns: 1fr 1fr 1fr;
+  grid-template-areas: 
+  "sender recipient amount";
+}
+.sender{
+  grid-area: sender;
+  border: grey solid 1px;
+  overflow-y: none;
+  overflow-y: auto;
+  color: white;
+}
+
+
+.recipient{
+  grid-area: recipient;
+  border: grey solid 1px;
+  overflow-y: none;
+  overflow-y: auto;
+  color: white;
+
+}
+
+.amount{
+  grid-area: amount;
+  border: grey solid 1px;
+  overflow-y: none;
+  overflow-y: auto;
+  color: white;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: 
+  "senderbox recipientbox amountbox";
+}
+.recipientbox{
+  grid-area: recipientbox;
+}
+.senderbox{
+  grid-area: senderbox;
+}
+.amountbox{
+  grid-area: amountbox;
+}
+
