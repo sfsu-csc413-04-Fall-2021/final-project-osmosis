@@ -63,7 +63,6 @@ function Login() {
   // }
 
   return (
-    <div className="login-box" >
 
       <div className="log-in">
         <div className="contents">
@@ -94,8 +93,6 @@ function Login() {
 
 
       </div>
-
-    </div>
 
 
 
