@@ -3,9 +3,10 @@
     padding-top: .35em;
     padding-bottom: .35em;
     display: grid;
-    gap: .1rem 3rem;
-    grid-template-rows: 1fr ;
+    gap: .1rem 3rem ;
+    grid-template-rows: 1fr  ;
     grid-template-columns: auto auto auto auto ;
+
     grid-template-areas: 
     "home signup login"
     "logout tran req payment";
@@ -69,3 +70,10 @@ body{
     background-color: rgb(177, 163, 163);
     /*color: grey;*/
 }
+
+.contents{
+    position:relative;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+  }

@@ -43,7 +43,7 @@ function Login() {
          // setResult(true);
           Cookies.set("loggedIn", user, {expires: 7});  // 7day expirations session
           console.log(Cookies.get("loggedIn")); // Should print true
-          window.location.replace('./');
+          window.location.replace('./Transactions');
         } else {
          // setResult(data.error);
          window.location.replace('./Login');
@@ -63,7 +63,6 @@ function Login() {
   // }
 
   return (
-    <div className="login-box" >
 
       <div className="log-in">
         <div className="contents">
@@ -94,8 +93,6 @@ function Login() {
 
 
       </div>
-
-    </div>
 
 
 

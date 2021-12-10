@@ -8,7 +8,6 @@ import PopUp from "./PopUp.js";
 
 function Transaction(props) {
     return (
-
         <div className="box">
             <div className="sender">
                 {props.sender}
@@ -133,6 +132,7 @@ class Transactions extends React.Component {
                 <div className="contents">
                     <h2>Transactions</h2>
                     <UserInfo />
+                    <br />
                     <div className="grid">
                         <div className="senderbox">Sender</div>
                         <div className="recipientbox">Recipient</div>

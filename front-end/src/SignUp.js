@@ -65,9 +65,9 @@ function SignUp() {
 
 
         }
-        Cookies.set("loggedIn", user, {expires: 7});  // 7day expirations session
+        Cookies.set("loggedIn", user, { expires: 7 });  // 7day expirations session
         console.log(Cookies.get("loggedIn"));
-        
+
 
         const body = {
             //body of post request
@@ -130,46 +130,39 @@ function SignUp() {
     }
     return (
 
+        <div className="sign-up-area">
+            <div className="contents">
+                <h2>Sign Up for Osmosis Payment</h2>
+                <div className="setUsername">
+                    <label>Enter a Username</label>
+                    <br>
+                    </br>
+                    <input id="username" value={user} onChange={(e) => setUser(e.target.value)} className="userName-input">
+                    </input>
+                    <br>
+                    </br>
 
-        <div className="sign-up box">
+                    <label>Enter a Password</label>
+                    <br>
+                    </br>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="userName-input">
+                    </input>
+                    <br>
+                    </br>
 
-            <div className="sign-up-area">
-                <div className="contents">
-                    <h2>Sign Up for Osmosis Payment</h2>
-                    <div className="setUsername">
-                        <label>Enter a Username</label>
-                        <br>
-                        </br>
-                        <input id="username" value={user} onChange={(e) => setUser(e.target.value)} className="userName-input">
-                        </input>
-                        <br>
-                        </br>
+                    <label>Re-enter Password</label>
+                    <br>
+                    </br>
+                    <input type="password" value={repassword} onChange={(e) => setRePassword(e.target.value)} className="userName-input">
+                    </input>
+                    <br>
+                    </br>
+                    <br>
+                    </br>
 
-                        <label>Enter a Password</label>
-                        <br>
-                        </br>
-                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="userName-input">
-                        </input>
-                        <br>
-                        </br>
-
-                        <label>Re-enter Password</label>
-                        <br>
-                        </br>
-                        <input type="password" value={repassword} onChange={(e) => setRePassword(e.target.value)} className="userName-input">
-                        </input>
-                        <br>
-                        </br>
-                        <br>
-                        </br>
-
-                            <button onClick={myHandler} >Submit</button>
-                    </div>
+                    <button onClick={myHandler} >Submit</button>
                 </div>
             </div>
-
-        
-
         </div>
     );
 
@@ -180,12 +173,12 @@ function SignUp() {
 
 export default SignUp;
 /*<Switch>
-        
+
         <Route path ="/Logout">  <Logout />  </Route>
         <Route path = "/MakePayment"> <MakePayment /> </Route>
         <Route path ="/Login">  <Login />  </Route>
         <Route path ="/Logout">  <Logout />  </Route>
         <Route path = "/SignUp"> <SignUp /> </Route>
         <Route path = "/"></Route>
-        
+
 </Switch>*/
