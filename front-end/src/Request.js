@@ -4,9 +4,7 @@ import Cookies from "js-cookie";
 import "./Login.js"
 import { Link, Route, Switch } from 'react-router-dom';
 import Login from "./Login.js";
-
-
-
+import PopUp from "./PopUp";
 
 function Request(props) {
     return (
@@ -27,17 +25,17 @@ function Request(props) {
 
 class RequestList extends React.Component {
     render() {
-        console.log("props" + this.props.data.requests.length);
-        if (this.props.data.requests) {
-            console.log(this.props.data.requests);
-            var requests = this.props.data.requests.map(
-                function (request) {
-                    console.log(request);
-                    return Request(request);
+        console.log("props" + this.props.data.transactions.length);
+        if (this.props.data.transactions) {
+            console.log(this.props.data.transactions);
+            var transactions = this.props.data.transactions.map(
+                function (transaction) {
+                    console.log(transaction);
+                    return Request(transaction);
                 });
             return (
                 <div className="transactions">
-                    {requests}
+                    {transactions}
                 </div>
             );
         }
@@ -66,7 +64,7 @@ class Requests extends React.Component {
             method: 'post',
             body: JSON.stringify(body)
         };
-        fetch('api/view-all', settings)
+        fetch('api/view-requests', settings)
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({ data: responseJson })
@@ -94,6 +92,8 @@ class Requests extends React.Component {
                         <div className="recipientbox">Recipient</div>
                         <div className="amountbox">Amount</div>
                     </div>
+                    {this.state.data ? <RequestList data={this.state.data} /> : <PopUp />}
+                    <br />
                   </div>  
                   
                     <button onClick={closeBox}>Close</button>
