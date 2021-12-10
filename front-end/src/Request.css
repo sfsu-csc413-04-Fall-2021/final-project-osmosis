@@ -64,9 +64,9 @@
   color: white;
 }
 
-.grid{
+.grids{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr ;
   grid-template-areas: 
   "senderbox recipientbox amountbox";
 }

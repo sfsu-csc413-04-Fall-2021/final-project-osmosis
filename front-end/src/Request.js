@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import "./Login.js"
 import { Link, Route, Switch } from 'react-router-dom';
 import Login from "./Login.js";
-
+import PopUp from "./PopUp.js";
 
 
 
@@ -25,6 +25,14 @@ function Request(props) {
     );
 }
 
+const myAccept=()=>{
+    window.location.replace('../Transactions')
+}
+const myDecline=()=>{
+    window.location.reload('../Request')
+}
+
+
 class RequestList extends React.Component {
     render() {
         console.log("props" + this.props.data.requests.length);
@@ -36,7 +44,7 @@ class RequestList extends React.Component {
                     return Request(request);
                 });
             return (
-                <div className="transactions">
+                <div className="requests">
                     {requests}
                 </div>
             );
@@ -89,14 +97,21 @@ class Requests extends React.Component {
                     <label>Username: </label>
                     {Cookies.get("loggedIn")}
                     <br />
-                    <div className="grid">
+                    <div className="grids">
                         <div className="senderbox">Sender</div>
                         <div className="recipientbox">Recipient</div>
                         <div className="amountbox">Amount</div>
+                        
                     </div>
-                  </div>  
+                    <div className="requestResult">
+                    <button onClick={myAccept}  className="accept">Accept</button>
+                    <button onClick={myDecline} className="decline">Decline</button>
+                    </div>
+                  </div> 
+                   
                   
-                    <button onClick={closeBox}>Close</button>
+                
+                 <button onClick={closeBox}>Close</button>
                 </div>
          
         );
