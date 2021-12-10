@@ -9,8 +9,18 @@ import PopUp from "./PopUp.js";
 
 
 function Request(props) {
+    const [password, setPassword] = React.useState('');
+    const [result, setResult] = React.useState(null);
+
+    const myAccept = () => {
+        window.location.replace('../Transactions')
+    }
+    const myDecline = () => {
+        window.location.reload('../Request')
+    }
+    
     return (
-        
+
         <div className="box">
             <div className="sender">
                 {props.sender}
@@ -21,19 +31,49 @@ function Request(props) {
             <div className="amount">
                 ${props.amount}
             </div>
+            <div className="requestResult">
+                <button onClick={myAccept} className="accept">Accept</button>
+                <button onClick={myDecline} className="decline">Decline</button>
+            </div>
         </div>
     );
 }
 
-const myAccept=()=>{
-    window.location.replace('../Transactions')
-}
-const myDecline=()=>{
-    window.location.reload('../Request')
-}
-
 
 class RequestList extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: null
+        };
+    }
+
+    componentWillMount() {
+        this.renderMyData();
+    }
+
+    renderMyData() {
+        const body = {
+            username: Cookies.get("loggedIn")
+        };
+        const settings = {
+            method: 'post',
+            body: JSON.stringify(body)
+        };
+        fetch('api/view-requests', settings)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ data: responseJson })
+                console.log(responseJson);
+            })
+            .catch((error) => {
+                console.log("ERROR");
+                console.error(error);
+            });
+    }
+
     render() {
         console.log("props" + this.props.data.transactions.length);
         if (this.props.data.transactions) {
@@ -101,27 +141,22 @@ class Requests extends React.Component {
                         <div className="senderbox">Sender</div>
                         <div className="recipientbox">Recipient</div>
                         <div className="amountbox">Amount</div>
-                        
+
                     </div>
-                    <div className="requestResult">
-                    <button onClick={myAccept}  className="accept">Accept</button>
-                    <button onClick={myDecline} className="decline">Decline</button>
-                    </div>
-                  </div> 
-                   
-                  {this.state.data ? <RequestList data={this.state.data} /> : <PopUp />}
-                
-                 <button onClick={closeBox}>Close</button>
                 </div>
-         
+
+                {this.state.data ? <RequestList data={this.state.data} /> : <PopUp />}
+
+                <button onClick={closeBox}>Close</button>
+            </div>
+
         );
     }
 }
 
-   
+
 
 export default Requests;
 
 
 
- 
