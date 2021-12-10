@@ -14,7 +14,7 @@ function Default() {
   if (Cookies.get() !== null){
     return (
 
-      <div id="main" >
+      <div id="indexheader" >
         
         <Link to= "/" class = "headers">
         <div id="home" class="headers">Home</div>
