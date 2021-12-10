@@ -81,8 +81,9 @@ class UserInfo extends React.Component {
                 <label>Username: </label>
                 {Cookies.get("loggedIn")}
                 <br />
-                <label>Account Balance</label>
+                <label>Account Balance: $</label>
                 {this.state.data ? this.state.data : <div />}
+                <br />
             </div>
         );
     }
@@ -138,6 +139,7 @@ class Transactions extends React.Component {
                         <div className="amountbox">Amount</div>
                     </div>
                     {this.state.data ? <TransactionsList data={this.state.data} /> : <PopUp />}
+                    <br />
                     <button onClick={closeBox}>Close</button>
                 </div>
             </div>

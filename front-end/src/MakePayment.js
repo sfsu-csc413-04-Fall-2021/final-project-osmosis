@@ -8,13 +8,15 @@ function MakePayment() {
     const [amount, setAmount] = React.useState('');
     const [result, setResult] = React.useState('');
 
+
+    
     const myHandlerRequest = () => {
         console.log(Cookies.get("loggedIn"));
         const body = {
             sender: Cookies.get("loggedIn"),
             recipient: recipient,
             amount: amount
-        };
+    };
         const settings = {
             method: 'post',
             body: JSON.stringify(body)
@@ -77,7 +79,8 @@ function MakePayment() {
                     <br></br>
 
                     <button onClick={myHandlerSend}>Send</button>
-                    <button onClick={myHandlerRequest}>Request</button>
+                    <button onClick={myHandlerRequest} >Request</button>
+                    
                 </div>
             </div>
         </div>
