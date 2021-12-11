@@ -233,9 +233,9 @@ public class SparkDirectory {
         post("/api/accept", (req,res) -> {
             String body = req.body();
             SignUpResultDto result = new SignUpResultDto(true);
-            RequestTransaction payment = gson.fromJson(body, RequestTransaction.class);
+            UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
 
-            //TODO check if request exists
+            //check if request exists
             boolean transactionExists = TransactionDao.getInstance().getAllRequests().stream()
                     .anyMatch(transaction -> ((BaseTransactionDto) transaction).getUniqueId().equals(payment.getUniqueId()));
             if(!transactionExists) {
@@ -243,7 +243,7 @@ public class SparkDirectory {
                 result.add("Transaction not found");
                 return gson.toJson(result);
             }
-            //TODO check if valid sender, recipient
+            //check if valid sender, recipient
             BasicUser sender = (BasicUser) UserDao.getInstance().get(payment.getSender());
             BasicUser recipient = (BasicUser) UserDao.getInstance().get(payment.getRecipient());
 
@@ -259,9 +259,43 @@ public class SparkDirectory {
             //TODO check if enough funds
             //TODO if not ask for bank
             //create new UserToUserTransaction
-            UserToUserTransaction completePayment = payment.complete();
+            payment.setComplete(true);
+            //remove RequestTransaction from TransactionDao
+            TransactionDao.getInstance().delete(payment);
             //add to TransactionDao
-            TransactionDao.getInstance().put(completePayment);
+            TransactionDao.getInstance().put(payment);
+
+            return gson.toJson(result);
+        });
+
+        post("/api/decline", (req,res) -> {
+            String body = req.body();
+            SignUpResultDto result = new SignUpResultDto(true);
+            RequestTransaction payment = gson.fromJson(body, RequestTransaction.class);
+
+            //check if request exists
+            boolean transactionExists = TransactionDao.getInstance().getAllRequests().stream()
+                    .anyMatch(transaction -> ((BaseTransactionDto) transaction).getUniqueId().equals(payment.getUniqueId()));
+            if(!transactionExists) {
+                System.out.println("Transaction not found");
+                result.add("Transaction not found");
+                return gson.toJson(result);
+            }
+            //check if valid sender, recipient
+            BasicUser sender = (BasicUser) UserDao.getInstance().get(payment.getSender());
+            BasicUser recipient = (BasicUser) UserDao.getInstance().get(payment.getRecipient());
+
+            boolean senderExists = UserDao.getInstance().getAll().stream()
+                    .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(sender.getUsername()));
+            boolean recipientExists = UserDao.getInstance().getAll().stream()
+                    .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(recipient.getUsername()));
+            if(!(senderExists && recipientExists)) {
+                System.out.println("At least one user not found");
+                result.add("At least one user not found");
+                return gson.toJson(result);
+            }
+            //TODO check if enough funds
+            //TODO if not ask for bank
             //remove RequestTransaction from TransactionDao
             TransactionDao.getInstance().delete(payment);
 

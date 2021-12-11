@@ -41,7 +41,8 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
   }
 
   public void delete(BaseTransactionDto baseTransactionDto) {
-    collection.deleteOne(baseTransactionDto.toDocument());
+    System.out.println("Delete");
+    collection.deleteOne(eq("_id",baseTransactionDto.getUniqueId()));
   }
 
   @Override

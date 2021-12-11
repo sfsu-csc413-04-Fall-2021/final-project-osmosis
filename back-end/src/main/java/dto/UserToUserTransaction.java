@@ -10,9 +10,9 @@ public class UserToUserTransaction extends BaseTransactionDto {
   private Boolean complete;
   private String privacy;
 
-  public UserToUserTransaction(Double amount, String to, String from, Boolean complete, String note, String time, String privacy) {
+  public UserToUserTransaction(String id, Double amount, String to, String from, Boolean complete, String note, String time, String privacy) {
     super();
-    setUniqueId(new ObjectId().toString());
+    setUniqueId(id);
     this.amount = amount;
     recipient = to;
     sender = from;
@@ -20,6 +20,10 @@ public class UserToUserTransaction extends BaseTransactionDto {
     this.note = note;
     timeStamp = time;
     this.privacy = privacy;
+  }
+
+  public UserToUserTransaction(Double amount, String to, String from, Boolean complete, String note, String time, String privacy) {
+    this(new ObjectId().toString(), amount, to, from, complete, note, time, privacy);
   }
 
   @Override
@@ -39,7 +43,8 @@ public class UserToUserTransaction extends BaseTransactionDto {
   }
 
   public static UserToUserTransaction fromDocument(Document document){
-    return new UserToUserTransaction((Double)document.get("amount"),
+    return new UserToUserTransaction((String) document.get("_id"),
+            (Double)document.get("amount"),
             (String) document.get("recipient"),
             (String) document.get("sender"),
             (Boolean) document.get("complete"),
