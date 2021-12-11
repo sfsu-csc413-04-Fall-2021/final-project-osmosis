@@ -231,9 +231,11 @@ public class SparkDirectory {
         });
 
         post("/api/accept", (req,res) -> {
-            String body = req.body();
+            String body = req.body().replace("_id","uniqueId");
             SignUpResultDto result = new SignUpResultDto(true);
             UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
+            System.out.println(body);
+            System.out.println(payment.getUniqueId());
 
             //check if request exists
             boolean transactionExists = TransactionDao.getInstance().getAllRequests().stream()
@@ -244,8 +246,8 @@ public class SparkDirectory {
                 return gson.toJson(result);
             }
             //check if valid sender, recipient
-            BasicUser sender = (BasicUser) UserDao.getInstance().get(payment.getSender());
-            BasicUser recipient = (BasicUser) UserDao.getInstance().get(payment.getRecipient());
+            BasicUser sender = UserDao.getInstance().getUser(payment.getSender());
+            BasicUser recipient = UserDao.getInstance().getUser(payment.getRecipient());
 
             boolean senderExists = UserDao.getInstance().getAll().stream()
                     .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(sender.getUsername()));
@@ -263,7 +265,9 @@ public class SparkDirectory {
             //remove RequestTransaction from TransactionDao
             TransactionDao.getInstance().delete(payment);
             //add to TransactionDao
-            TransactionDao.getInstance().put(payment);
+            TransactionDao.getInstance().putTransaction(payment);
+            UserDao.getInstance().addFunds(recipient.getUsername(), payment.amount);
+            UserDao.getInstance().subtractFunds(sender.getUsername(), payment.amount);
 
             return gson.toJson(result);
         });
@@ -271,7 +275,7 @@ public class SparkDirectory {
         post("/api/decline", (req,res) -> {
             String body = req.body();
             SignUpResultDto result = new SignUpResultDto(true);
-            RequestTransaction payment = gson.fromJson(body, RequestTransaction.class);
+            UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
 
             //check if request exists
             boolean transactionExists = TransactionDao.getInstance().getAllRequests().stream()
@@ -339,7 +343,6 @@ public class SparkDirectory {
         });
 
         post("/api/view-requests", (req,res) -> { //TODO view all public transactions and logged-in user's private transactions
-            System.out.println("View all");
             String body = req.body();
             SignUpResultDto result = new SignUpResultDto(true);
             BasicUser user = gson.fromJson(body, BasicUser.class);
@@ -356,7 +359,6 @@ public class SparkDirectory {
             ViewAllResultsDto transResult = new ViewAllResultsDto();
 
             for(Object transaction:TransactionDao.getInstance().getAllRequests()) {
-                System.out.println(((UserToUserTransaction) transaction).toDocument());
                 transResult.add(((UserToUserTransaction) transaction).toDocument());
             }
 

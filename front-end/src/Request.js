@@ -171,7 +171,6 @@ class Requests extends React.Component {
                         <div className="senderbox">Sender</div>
                         <div className="recipientbox">Recipient</div>
                         <div className="amountbox">Amount</div>
-
                     </div>
                 </div>
 

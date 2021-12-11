@@ -3,6 +3,7 @@ package dao;
 import com.mongodb.client.MongoCollection;
 import dto.BaseTransactionDto;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dto.UserToUserTransaction;
@@ -37,18 +38,19 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
   }
 
   public void putTransaction(UserToUserTransaction transaction) {
+    System.out.println("Put");
     collection.insertOne(transaction.toDocument());
   }
 
-  public void delete(BaseTransactionDto baseTransactionDto) {
+  public void delete(UserToUserTransaction transaction) {
     System.out.println("Delete");
-    collection.deleteOne(eq("_id",baseTransactionDto.getUniqueId()));
+    collection.deleteOne(eq("_id",transaction.getUniqueId()));
   }
 
   @Override
-  public BaseTransactionDto get(String id) {
+  public UserToUserTransaction get(String id) {
     Document doc = collection.find(eq("_id",id)).first();
-    return BaseTransactionDto.toDto(doc);
+    return UserToUserTransaction.fromDocument(doc);
   }
 
   @Override
@@ -56,6 +58,9 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
     List<UserToUserTransaction> all = new ArrayList<>();
     List<Document> requestDocs = collection.find(eq("complete",false)).into(new ArrayList<>());
     List<Document> completeDocs = collection.find(eq("complete",true)).into(new ArrayList<>());
+
+    Collections.reverse(requestDocs);
+    Collections.reverse(completeDocs);
 
     for(Document doc:requestDocs) {
       UserToUserTransaction payment = UserToUserTransaction.fromDocument(doc);
@@ -71,6 +76,8 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
   public List getAllRequests() {
     List<UserToUserTransaction> all = new ArrayList<>();
     List<Document> requestDocs = collection.find(eq("complete",false)).into(new ArrayList<>());
+
+    Collections.reverse(requestDocs);
 
     for(Document doc:requestDocs) {
       UserToUserTransaction payment = UserToUserTransaction.fromDocument(doc);
