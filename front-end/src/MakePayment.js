@@ -13,8 +13,8 @@ function MakePayment() {
     const myHandlerRequest = () => {
         console.log(Cookies.get("loggedIn"));
         const body = {
-            sender: Cookies.get("loggedIn"),
-            recipient: recipient,
+            sender: recipient,
+            recipient: Cookies.get("loggedIn"),
             amount: amount
     };
         const settings = {
@@ -85,12 +85,7 @@ function MakePayment() {
         fetch('/api/pay', settings)
         .then(res => res.json())
         .then(data => {
-            console.log(data.body);
-            if(data.body == null){
-                window.alert("User does not exist");
-                return false;
-            }
-          console.log(data);
+            console.log(data);
           if (data.isSuccess) {
            setResult(true);
            window.location.replace('../Transactions');

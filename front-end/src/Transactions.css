@@ -1,7 +1,7 @@
 .transactionsbox{
     border-radius: 10px;
     background-color:#14365d93;
-    width: 350px;
+    width: 40rem;
     height: auto;
     padding: 4px;
     border: rgb(26, 22, 22);
@@ -28,16 +28,7 @@
   
 } 
 
-.box{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-auto-rows: 1;
-  grid-auto-columns: 1fr 1fr 1fr;
-  grid-template-areas: 
-  "sender recipient amount";
-}
-.sender{
+.senderbox{
   grid-area: sender;
   border: rgb(177, 163, 163) solid 1px;
   overflow-y: none;
@@ -46,7 +37,7 @@
 }
 
 
-.recipient{
+.recipientbox{
   grid-area: recipient;
   border: rgb(177, 163, 163) solid 1px;
   overflow-y: none;
@@ -56,8 +47,16 @@
 
 }
 
-.amount{
+.amountbox{
   grid-area: amount;
+  border: rgb(177, 163, 163) solid 1px;
+  overflow-y: none;
+  overflow-y: auto;
+  color: white;
+}
+
+.typebox{
+  grid-area: type;
   border: rgb(177, 163, 163) solid 1px;
   overflow-y: none;
   overflow-y: auto;
@@ -66,25 +65,31 @@
 
 .grid{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas: 
-  "senderbox recipientbox amountbox";
+  "senderbox recipientbox amountbox typebox";
 }
 .recipientbox{
   grid-area: recipientbox;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 15px;
   color: white;
 }
 .senderbox{
   grid-area: senderbox;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 15px;
   color: white;
 
 }
 .amountbox{
   grid-area: amountbox;
+  font-weight: 400;
+  font-size: 15px;
+  color: white;
+}
+.typebox{
+  grid-area: typebox;
   font-weight: 400;
   font-size: 20px;
   color: white;

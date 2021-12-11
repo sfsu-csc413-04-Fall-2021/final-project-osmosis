@@ -7,16 +7,20 @@ import Login from "./Login.js";
 import PopUp from "./PopUp.js";
 
 function Transaction(props) {
+    console.log("Complete" + props.complete);
     return (
-        <div className="box">
-            <div className="sender">
+        <div className="grid">
+            <div className="senderbox">
                 {props.sender}
             </div>
-            <div className="recipient">
+            <div className="recipientbox">
                 {props.recipient}
             </div>
-            <div className="amount">
+            <div className="amountbox">
                 ${props.amount}
+            </div>
+            <div className="typebox">
+                {props.complete ? "Sent" : "Requested"}
             </div>
         </div>
     );
@@ -137,10 +141,10 @@ class Transactions extends React.Component {
                         <div className="senderbox">Sender</div>
                         <div className="recipientbox">Recipient</div>
                         <div className="amountbox">Amount</div>
+                        <div className="typebox">Type</div>
                     </div>
                     {this.state.data ? <TransactionsList data={this.state.data} /> : <PopUp />}
                     <br />
-                    <button onClick={closeBox}>Close</button>
                 </div>
             </div>
         );
