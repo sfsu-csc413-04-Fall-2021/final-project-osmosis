@@ -1,4 +1,3 @@
-import './SignedInPage.css';
 import React from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 
@@ -6,7 +5,7 @@ function SignedInPage() {
 
   return (
 
-    <div id="main">
+    <div id="logged-in" className="nav-bar">
 
       <Link to="/Transactions" class="headers">
         <div id="transactions" class="headers">Transactions</div>
@@ -28,13 +27,3 @@ function SignedInPage() {
 
 
 export default SignedInPage;
-
-// <Switch>
-//         <Route path ="/Login">  <Login />  </Route>
-//         <Route path ="/Logout">  <Logout />  </Route>
-//         <Route path = "/SignUp"> <SignUp /> </Route>
-//         <Route path = "/"></Route>
-//         <Route path = "/SignedInPage"> <SignedInPage /> </Route>
-//         <Route path = "/Transactions"> <Transactions /> </Route>
-        
-//       </Switch>

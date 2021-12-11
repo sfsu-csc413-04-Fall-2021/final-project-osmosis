@@ -1,5 +1,4 @@
 import React from "react";
-import "./Logout.css";
 import Cookies from 'js-cookie';
 
 function Logout(){
@@ -10,15 +9,14 @@ function Logout(){
     }
 
     const noClicked=()=>{
-        window.location.replace("../")
+        window.location.replace("../Transactions")
     }
    
     return(
-        <div className="div-1">
-            <h1>Do you wish to Log-out?</h1>
-            <button className="button1" onClick={myRedirect} >Yes</button>
-            <button  className="button1" onClick={noClicked}>No</button>
-            
+        <div className="log-out-field">
+            <h1>Do you wish to log out?</h1>
+            <button className="button" onClick={myRedirect}>Yes</button>
+            <button  className="button" onClick={noClicked}>No</button>
         </div>
     );
 }

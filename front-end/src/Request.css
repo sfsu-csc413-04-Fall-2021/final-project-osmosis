@@ -78,7 +78,6 @@
   grid-template-areas: 
   "senderbox recipientbox amountbox";
   margin: center;
-
 }
 .requestResult{
   display: grid;

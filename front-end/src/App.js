@@ -35,7 +35,6 @@ function App() {
       <Header isLoggedIn={Cookies.get('loggedIn')}/>
 
       </nav>
-      <div id="background"></div>
 
       <Switch>
         <Route path = "/Login">  <Login />  </Route>
@@ -49,23 +48,7 @@ function App() {
 
     </div>
 
-
-
-
-
   );
 }
 
 export default App;
-
-/*<Link to="/Logout" class = "headers">
-          <div id="logout" class="headers" >Logout</div>
-          </Link>
-          <Link to="/Transactions" class = "headers">
-          <div id="tran" class="headers">Transactions</div>
-          </Link>
-          <Link to= "/MakePayment" class = "headers">
-          <div id="payment" class="headers">Make a Payment</div>
-          </Link>*/
-
-//</div>img id = "photo" class = "photos" src = "https://exchangerateiq.com/Riq/images/posts/posts_image/1593762776moneyfactor.jpg" alt = "photo"></img>

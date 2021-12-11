@@ -1,48 +1,27 @@
-#main{
-    grid-area: content;
-    padding-top: .35em;
-    padding-bottom: .35em;
-    display: grid;
-    gap: .1rem .3rem;
-    grid-template-rows: 1fr ;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-areas: 
-    "home signup login"
-    "logout tran payment";
-    background-color: black;
+body{
+    background-image: url('https://exchangerateiq.com/Riq/images/posts/posts_image/1593762776moneyfactor.jpg');
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
-#indexheader{
-    grid-area: content;
+
+.nav-bar{
     padding-top: .35em;
     padding-bottom: .35em;
     display: grid;
     column-width: 200px;
     text-align: center;
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
     background-color: black;
 }
 
-.Popupcontent{
-    border-radius: 5px;
-    background-color:black;
-    width: 350px;
-    height: 250px;
-    padding: 4px;
-    border: rgb(26, 22, 22);
-    
-    margin: 250px auto auto auto;
-    text-align: center;
-    box-shadow: 5px 10px 50px white;
-      
-  }
+#logged-in.nav-bar{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
 
-body{
-    background-image: url('https://exchangerateiq.com/Riq/images/posts/posts_image/1593762776moneyfactor.jpg') center center;
-    justify-content: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+#logged-out.nav-bar{
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 #title{
@@ -51,36 +30,7 @@ body{
     text-align: center;
     padding-bottom: .5rem;
     color: white;
-    /*width: 1262.8px;
-    height: 629.2px;
-    background-image: url('https://exchangerateiq.com/Riq/images/posts/posts_image/1593762776moneyfactor.jpg');
-    */
 }
-
-#home{
-    grid-area: home;
-}
-#login{
-    grid-area: login;
-}
-/*#logout{
-    grid-area: logout;
-}*/
-/*#tran{
-    grid-area: tran;
-}*/
-/*#payment{
-    grid-area: payment;
-}*/
-#signup{
-    grid-area: signup;
-}
-#photo{
-    width: 1262.8px;
-    height: 500px;
-
-}
-
 
 .headers{
     font-size: 20px;
@@ -97,5 +47,108 @@ body{
 }
 .headers:hover{
     background-color: rgb(177, 163, 163);
-    /*color: grey;*/
+}
+
+.field{
+    border-radius: 10px;
+    background-color: rgb(205, 205, 214);
+    width: 350px;
+    height: 350px;
+    padding: 4px;
+    border: rgb(26, 22, 22);
+    
+    margin: 250px auto auto auto;
+    text-align: center;
+    box-shadow: 5px 10px 50px rgb(160, 156, 158);
+}
+
+.pop-up{
+    border-radius: 5px;
+    background-color: black;
+    height: 300px;
+    
+    color: white;
+}
+
+.input{
+    background-color: rgba(206, 197, 197, 0.514);
+    border-radius: 25px;
+} 
+
+.contents{
+    position:relative;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+.box{
+    font-weight: 400;
+    font-size: 15px;
+    border: rgb(177, 163, 163) solid 1px;
+    overflow-y: auto;
+}
+
+.transactions-field{
+    background-color:#14365d93;
+    width: 40rem;
+    height: auto;
+    padding: 4px;
+    border: rgb(26, 22, 22);
+    
+    margin: 200px auto auto auto;
+    padding-top: 50px;
+    text-align: center;
+    box-shadow: 5px 10px 50px rgb(160, 156, 158);
+    display: grid;
+}
+
+.payment-field{
+    border-radius: 5px;
+    background-color:#14365d93;
+    width: 350px;
+    height: 250px;
+    padding: 4px;
+    border: rgb(26, 22, 22);
+    
+    margin: 250px auto auto auto;
+    text-align: center;
+    box-shadow: 5px 10px 50px rgb(160, 156, 158);
+}
+
+.log-out-field{
+    border-radius: 5px;
+    background-color:#14365d93;
+    width: 350px;
+    height: 250px;
+    padding: 4px;
+    border: rgb(26, 22, 22);
+    
+    margin: 250px auto auto auto;
+    text-align: center;
+    box-shadow: 5px 10px 50px rgb(160, 156, 158);
+}
+
+.payment-input{
+    border-radius: 25px;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#request.grid{
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.requestResult{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    margin: center;
+}
+
+.button{
+    font-size: 15px;
+    box-shadow: 5px 10px 50px rgb(255, 255, 255);
 }
