@@ -273,21 +273,21 @@ public class SparkDirectory {
         });
 
         post("/api/decline", (req,res) -> {
-            String body = req.body();
+            String body = req.body().replace("_id","uniqueId");
             SignUpResultDto result = new SignUpResultDto(true);
             UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
 
             //check if request exists
             boolean transactionExists = TransactionDao.getInstance().getAllRequests().stream()
-                    .anyMatch(transaction -> ((BaseTransactionDto) transaction).getUniqueId().equals(payment.getUniqueId()));
+                    .anyMatch(transaction -> ((UserToUserTransaction) transaction).getUniqueId().equals(payment.getUniqueId()));
             if(!transactionExists) {
                 System.out.println("Transaction not found");
                 result.add("Transaction not found");
                 return gson.toJson(result);
             }
             //check if valid sender, recipient
-            BasicUser sender = (BasicUser) UserDao.getInstance().get(payment.getSender());
-            BasicUser recipient = (BasicUser) UserDao.getInstance().get(payment.getRecipient());
+            BasicUser sender = (BasicUser) UserDao.getInstance().getUser(payment.getSender());
+            BasicUser recipient = (BasicUser) UserDao.getInstance().getUser(payment.getRecipient());
 
             boolean senderExists = UserDao.getInstance().getAll().stream()
                     .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(sender.getUsername()));
