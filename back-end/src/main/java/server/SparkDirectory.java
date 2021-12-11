@@ -238,7 +238,7 @@ public class SparkDirectory {
             System.out.println(payment.getUniqueId());
 
             //check if request exists
-            boolean transactionExists = TransactionDao.getInstance().getAllRequests().stream()
+            boolean transactionExists = TransactionDao.getInstance().getAllRequests(payment.getSender()).stream()
                     .anyMatch(transaction -> ((BaseTransactionDto) transaction).getUniqueId().equals(payment.getUniqueId()));
             if(!transactionExists) {
                 System.out.println("Transaction not found");
@@ -278,7 +278,7 @@ public class SparkDirectory {
             UserToUserTransaction payment = gson.fromJson(body, UserToUserTransaction.class);
 
             //check if request exists
-            boolean transactionExists = TransactionDao.getInstance().getAllRequests().stream()
+            boolean transactionExists = TransactionDao.getInstance().getAllRequests(payment.getSender()).stream()
                     .anyMatch(transaction -> ((UserToUserTransaction) transaction).getUniqueId().equals(payment.getUniqueId()));
             if(!transactionExists) {
                 System.out.println("Transaction not found");
@@ -358,7 +358,7 @@ public class SparkDirectory {
             //found user
             ViewAllResultsDto transResult = new ViewAllResultsDto();
 
-            for(Object transaction:TransactionDao.getInstance().getAllRequests()) {
+            for(Object transaction:TransactionDao.getInstance().getAllRequests(user.getUsername())) {
                 transResult.add(((UserToUserTransaction) transaction).toDocument());
             }
 

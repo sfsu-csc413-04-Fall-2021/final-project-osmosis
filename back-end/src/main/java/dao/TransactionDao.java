@@ -9,6 +9,7 @@ import java.util.List;
 import dto.UserToUserTransaction;
 import org.bson.Document;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 
 public class TransactionDao implements BaseDao<BaseTransactionDto> {
@@ -73,9 +74,11 @@ public class TransactionDao implements BaseDao<BaseTransactionDto> {
     return all;
   }
 
-  public List getAllRequests() {
+  public List getAllRequests(String username) {
     List<UserToUserTransaction> all = new ArrayList<>();
-    List<Document> requestDocs = collection.find(eq("complete",false)).into(new ArrayList<>());
+    List<Document> requestDocs = collection.find(and(
+            eq("complete",false),eq("sender",username)
+    )).into(new ArrayList<>());
 
     Collections.reverse(requestDocs);
 
