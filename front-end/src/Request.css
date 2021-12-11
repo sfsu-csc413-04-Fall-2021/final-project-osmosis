@@ -37,6 +37,8 @@
   grid-template-areas: 
   "sender recipient amount";
 }
+
+
 .sender{
   grid-area: sender;
   border: rgb(177, 163, 163) solid 1px;
@@ -75,6 +77,15 @@
   grid-template-columns: 1fr 1fr 1fr ;
   grid-template-areas: 
   "senderbox recipientbox amountbox";
+  margin: center;
+
+}
+.requestResult{
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-areas: 
+"senderbox recipientbox amountbox";
+margin: center;
 
 }
 .recipientbox{

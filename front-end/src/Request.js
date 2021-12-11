@@ -50,16 +50,17 @@ function Request(props) {
     }
 
     return (
-
-        <div className="box">
-            <div className="sender">
-                {props.sender}
-            </div>
-            <div className="recipient">
-                {props.recipient}
-            </div>
-            <div className="amount">
-                ${props.amount}
+        <div className="requestresults">
+            <div className="box">
+                <div className="sender">
+                    {props.sender}
+                </div>
+                <div className="recipient">
+                    {props.recipient}
+                </div>
+                <div className="amount">
+                    ${props.amount}
+                </div>
             </div>
             <div className="requestResult">
                 <button onClick={myAccept} className="accept">Accept</button>
@@ -176,6 +177,8 @@ class Requests extends React.Component {
                 </div>
 
                 {this.state.data ? <RequestList data={this.state.data} /> : <PopUp />}
+
+                <br />
 
                 <button onClick={closeBox}>Close</button>
             </div>
