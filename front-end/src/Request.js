@@ -9,16 +9,46 @@ import PopUp from "./PopUp.js";
 
 
 function Request(props) {
-    const [password, setPassword] = React.useState('');
-    const [result, setResult] = React.useState(null);
+    // const [password, setPassword] = React.useState('');
+    // const [result, setResult] = React.useState(null);
 
     const myAccept = () => {
+        const body = props;
+        const settings = {
+            method: 'post',
+            body: JSON.stringify(body)
+        };
+        fetch('api/accept', settings)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ data: responseJson })
+                console.log(responseJson);
+            })
+            .catch((error) => {
+                console.log("ERROR");
+                console.error(error);
+            });
         window.location.replace('../Transactions')
     }
     const myDecline = () => {
+        const body = props;
+        const settings = {
+            method: 'post',
+            body: JSON.stringify(body)
+        };
+        fetch('api/decline', settings)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({ data: responseJson })
+                console.log(responseJson);
+            })
+            .catch((error) => {
+                console.log("ERROR");
+                console.error(error);
+            });
         window.location.reload('../Request')
     }
-    
+
     return (
 
         <div className="box">
