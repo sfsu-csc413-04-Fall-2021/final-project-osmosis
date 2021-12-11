@@ -28,41 +28,6 @@
   
 } 
 
-.senderbox{
-  grid-area: sender;
-  border: rgb(177, 163, 163) solid 1px;
-  overflow-y: none;
-  overflow-y: auto;
-  color: white;
-}
-
-
-.recipientbox{
-  grid-area: recipient;
-  border: rgb(177, 163, 163) solid 1px;
-  overflow-y: none;
-  overflow-y: auto;
-  color: white;
-  
-
-}
-
-.amountbox{
-  grid-area: amount;
-  border: rgb(177, 163, 163) solid 1px;
-  overflow-y: none;
-  overflow-y: auto;
-  color: white;
-}
-
-.typebox{
-  grid-area: type;
-  border: rgb(177, 163, 163) solid 1px;
-  overflow-y: none;
-  overflow-y: auto;
-  color: white;
-}
-
 .grid{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -73,25 +38,37 @@
   grid-area: recipientbox;
   font-weight: 400;
   font-size: 15px;
-  color: white;
+  color: black !important;
+  border: rgb(177, 163, 163) solid 1px;
+  overflow-y: none;
+  overflow-y: auto;
 }
 .senderbox{
   grid-area: senderbox;
   font-weight: 400;
   font-size: 15px;
-  color: white;
-
+  color: black !important;
+  border: rgb(177, 163, 163) solid 1px;
+  overflow-y: none;
+  overflow-y: auto;
 }
 .amountbox{
   grid-area: amountbox;
   font-weight: 400;
-  font-size: 15px;
-  color: white;
+  font-size: 20px;
+  color: black !important;
+  border: rgb(177, 163, 163) solid 1px;
+  overflow-y: none;
+  overflow-y: auto;
 }
+
 .typebox{
   grid-area: typebox;
   font-weight: 400;
   font-size: 20px;
-  color: white;
+  color: black !important;
+  border: rgb(177, 163, 163) solid 1px;
+  overflow-y: none;
+  overflow-y: auto;
 }
 

@@ -138,10 +138,10 @@ class Transactions extends React.Component {
                     <UserInfo />
                     <br />
                     <div className="grid">
-                        <div className="senderbox">Sender</div>
-                        <div className="recipientbox">Recipient</div>
-                        <div className="amountbox">Amount</div>
-                        <div className="typebox">Type</div>
+                        <div className="senderbox"><b>Sender</b></div>
+                        <div className="recipientbox"><b>Recipient</b></div>
+                        <div className="amountbox"><b>Amount</b></div>
+                        <div className="typebox"><b>Type</b></div>
                     </div>
                     {this.state.data ? <TransactionsList data={this.state.data} /> : <PopUp />}
                     <br />
