@@ -41,13 +41,55 @@ function MakePayment() {
             recipient: recipient,
             amount: amount
         };
+
+        const bodyValid = {
+            username: Cookies.get("loggedIn"),
+        };
+        const settingsValid = {
+            method: 'post',
+            body: JSON.stringify(bodyValid)
+        }
+        if(recipient!=""){
+        } else{
+            window.alert("Cannot send money to nothing.");
+            return false;
+        }
+        if(amount >= 0){
+        }else{
+            window.alert("Cannot make a negative payment.");
+            return false;
+        }
+        if(recipient == Cookies.get("loggedIn")){
+            window.alert("Cannot make a payment to yourself");
+            return false;
+        }
+        
+
+        fetch('/api/view-user', settingsValid)
+        .then(res => res.json())
+        .then(data => {
+            console.log(amount);
+            console.log(data);
+            if(data < amount){   // Not going into the conditional
+                window.alert("User does not have enough money");
+                return false;
+            }
+        });
+
         const settings = {
             method: 'post',
             body: JSON.stringify(body)
         };
+
+
         fetch('/api/pay', settings)
         .then(res => res.json())
         .then(data => {
+            console.log(data.body);
+            if(data.body == null){
+                window.alert("User does not exist");
+                return false;
+            }
           console.log(data);
           if (data.isSuccess) {
            setResult(true);
@@ -79,7 +121,7 @@ function MakePayment() {
                     <br></br>
 
                     <button onClick={myHandlerSend}>Send</button>
-                    <button onClick={myHandlerRequest} >Request</button>
+                    <button onClick={myHandlerRequest}>Request</button>
                     
                 </div>
             </div>

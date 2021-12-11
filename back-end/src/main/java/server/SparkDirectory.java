@@ -40,7 +40,7 @@ class SignUpResultDto {
 class Validator {
     public static SignUpResultDto isValidUsername(SignUpResultDto result, String username) {
         if(username.length() < 6) { //check length of username
-            result.add("Username is not long enough");
+            result.add("Usebrianparra@sfsu.edurname is not long enough");
         }
         if(username.matches(".[A-Z].")) { //if starts with a letter
             result.add("Username does not contain a capital letter");
