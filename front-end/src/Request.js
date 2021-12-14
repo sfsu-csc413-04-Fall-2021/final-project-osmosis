@@ -1,16 +1,13 @@
-import "./Request.css";
+// import "./Request.css";
 import React from "react";
 import Cookies from "js-cookie";
 import "./Login.js"
 import { Link, Route, Switch } from 'react-router-dom';
 import Login from "./Login.js";
 import PopUp from "./PopUp.js";
-
-
+import Loading from "./Loading.js";
 
 function Request(props) {
-    // const [password, setPassword] = React.useState('');
-    // const [result, setResult] = React.useState(null);
 
     const myAccept = () => {
         const body = props;
@@ -50,21 +47,21 @@ function Request(props) {
     }
 
     return (
-        <div className="requestresults">
-            <div className="box">
-                <div className="sender">
+        <div className="">
+            <div className="request grid">
+                <div className="box">
                     {props.sender}
                 </div>
-                <div className="recipient">
+                <div className="box">
                     {props.recipient}
                 </div>
-                <div className="amount">
+                <div className="box">
                     ${props.amount}
                 </div>
-            </div>
-            <div className="requestResult">
-                <button onClick={myAccept} className="accept">Accept</button>
-                <button onClick={myDecline} className="decline">Decline</button>
+                <div className="requestResult">
+                    <button onClick={myAccept} className="accept">Accept</button>
+                    <button onClick={myDecline} className="decline">Decline</button>
+                </div>
             </div>
         </div>
     );
@@ -162,33 +159,32 @@ class Requests extends React.Component {
             window.location.replace("../") //return to home page if clicked
         }
         return (
-            <div className="requestsbox">
+            <div className="transactions-field">
                 <div className="contents">
                     <h2>Requests</h2>
                     <label>Username: </label>
                     {Cookies.get("loggedIn")}
                     <br />
-                    <div className="grids">
-                        <div className="senderbox">Sender</div>
-                        <div className="recipientbox">Recipient</div>
-                        <div className="amountbox">Amount</div>
-                    </div>
                 </div>
 
-                {this.state.data ? <RequestList data={this.state.data} /> : <PopUp />}
+                {this.state.data ?
+                    <div>
+                        {this.state.data.transactions.length > 0 ?
+                            <div className="request grid">
+                                <div className="title"><b>Sender</b></div>
+                                <div className="title"><b>Recipient</b></div>
+                                <div className="title"><b>Amount</b></div>
+                            </div>
+                            : <div>No Requests</div>}
+                        <RequestList data={this.state.data} />
+                    </div>
+                    : <Loading />}
 
                 <br />
-
-                <button onClick={closeBox}>Close</button>
             </div>
 
         );
     }
 }
 
-
-
 export default Requests;
-
-
-

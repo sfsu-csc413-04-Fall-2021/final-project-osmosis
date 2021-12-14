@@ -1,14 +1,6 @@
 import React from "react";
-import "./SignUp.css";
 import { Link, Switch, Route } from 'react-router-dom';
 import Cookies from "js-cookie";
-
-//import MakePayment from './MakePayment';
-//import Logout from './Logout';
-//import Transactions from './Transactions';
-//import Login from './Login';
-
-//import SignedInPage from './SignedInPage';
 
 function SignUp() {
 
@@ -20,6 +12,29 @@ function SignUp() {
     setCookie(user);
     console.log(getCookie);
     const myHandler = () => {
+
+        var errorMessage = document.getElementById("ErrorMessage");
+
+        if(user == "")
+        {
+            errorMessage.innerHTML = "Please enter a valid username";
+            return false;
+        }
+        else if(password == "")
+        {
+            errorMessage.innerHTML = "Please enter a valid password";
+            return false;
+        }
+        else if(repassword == "")
+        {
+            errorMessage.innerHTML = "Please re-enter your valid password";
+            return false;
+        }
+        else
+        {
+            errorMessage.innerHTML = "";
+        }
+
         var ABC = new RegExp(
             "(?=.*[A-Z])"
         );
@@ -29,41 +44,36 @@ function SignUp() {
 
         if (ABC.test(user)) {
         } else {
-            window.alert("Username has to have an Uppercased letter")
+            errorMessage.innerHTML = "Username has to have an Uppercased letter";
             return false;
         }
         if (user.length <= 6) {
-            window.alert("Username must be more than 6 characters")
+            errorMessage.innerHTML = "Username must be more than 6 characters";
             return false;
 
         } if (ABC.test(password)) {
         } else {
-            window.alert("Password must contain a Uppercase letter.")
+            errorMessage.innerHTML = "Password must contain a Uppercase letter";
             return false;
 
 
         } if (password.length <= 6) {
-            window.alert("Password must be more than 6 characters")
+            errorMessage.innerHTML = "Password must be more than 6 characters";
             return false;
         } if (one.test(password)) {
         } else {
-            window.alert("Password must contain one numeric value")
+            errorMessage.innerHTML = "Password must contain one numeric value";
             return false;
         }
         if (password != repassword) {
-            window.alert("Passwords do not match")
+            errorMessage.innerHTML = "Passwords do not match";
+            //window.alert("Passwords do not match")
             return false;
 
         } else {
-
-
-
-
             console.log('Username= ' + user);
             console.log('Password= ' + password);
             console.log('RePassword= ' + repassword)
-
-
         }
         Cookies.set("loggedIn", user, { expires: 7 });  // 7day expirations session
         console.log(Cookies.get("loggedIn"));
@@ -92,9 +102,6 @@ function SignUp() {
                 }
             })
             .catch(console.log);
-
-
-
     };
 
     function setCookie(username) {
@@ -130,55 +137,38 @@ function SignUp() {
     }
     return (
 
-        <div className="sign-up-area">
+        <div className="sign-up-area field">
             <div className="contents">
                 <h2>Sign Up for Osmosis Payment</h2>
                 <div className="setUsername">
                     <label>Enter a Username</label>
-                    <br>
-                    </br>
-                    <input id="username" value={user} onChange={(e) => setUser(e.target.value)} className="userName-input">
+                    <br />
+                    <input id="username" value={user} onChange={(e) => setUser(e.target.value)} className="input">
                     </input>
-                    <br>
-                    </br>
+                    <br />
 
                     <label>Enter a Password</label>
-                    <br>
-                    </br>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="userName-input">
+                    <br />
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input">
                     </input>
-                    <br>
-                    </br>
+                    <br />
 
                     <label>Re-enter Password</label>
-                    <br>
-                    </br>
-                    <input type="password" value={repassword} onChange={(e) => setRePassword(e.target.value)} className="userName-input">
+                    <br />
+                    <input type="password" value={repassword} onChange={(e) => setRePassword(e.target.value)} className="input">
                     </input>
-                    <br>
-                    </br>
-                    <br>
-                    </br>
+                    <br />
+                    <br />
+
+                    {/*To display error messages */}
+                    <div className = "error" id = "ErrorMessage"></div>
 
                     <button onClick={myHandler} >Submit</button>
                 </div>
             </div>
         </div>
+
     );
-
-
 }
 
-
-
 export default SignUp;
-/*<Switch>
-
-        <Route path ="/Logout">  <Logout />  </Route>
-        <Route path = "/MakePayment"> <MakePayment /> </Route>
-        <Route path ="/Login">  <Login />  </Route>
-        <Route path ="/Logout">  <Logout />  </Route>
-        <Route path = "/SignUp"> <SignUp /> </Route>
-        <Route path = "/"></Route>
-
-</Switch>*/

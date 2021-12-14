@@ -1,4 +1,3 @@
-import "./PopUp.css";
 import React from 'react';
 
 function PopUp() {
@@ -14,7 +13,7 @@ function PopUp() {
         window.location.replace("./SignUp")
     }
     return (
-        <div id="Popup" className="Popup">
+        <div id="Popup" className="pop-up field">
             <div className="contents">
                 <br></br>
                 <br></br>
