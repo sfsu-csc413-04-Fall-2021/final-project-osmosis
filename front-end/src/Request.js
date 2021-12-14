@@ -5,6 +5,7 @@ import "./Login.js"
 import { Link, Route, Switch } from 'react-router-dom';
 import Login from "./Login.js";
 import PopUp from "./PopUp.js";
+import Loading from "./Loading.js";
 
 function Request(props) {
 
@@ -47,7 +48,7 @@ function Request(props) {
 
     return (
         <div className="">
-            <div className="grid">
+            <div className="request grid">
                 <div className="box">
                     {props.sender}
                 </div>
@@ -57,10 +58,10 @@ function Request(props) {
                 <div className="box">
                     ${props.amount}
                 </div>
-            </div>
-            <div className="requestResult">
-                <button onClick={myAccept} className="accept">Accept</button>
-                <button onClick={myDecline} className="decline">Decline</button>
+                <div className="requestResult">
+                    <button onClick={myAccept} className="accept">Accept</button>
+                    <button onClick={myDecline} className="decline">Decline</button>
+                </div>
             </div>
         </div>
     );
@@ -169,7 +170,7 @@ class Requests extends React.Component {
                 {this.state.data ?
                     <div>
                         {this.state.data.transactions.length > 0 ?
-                            <div id="request" className="grid">
+                            <div className="request grid">
                                 <div className="title"><b>Sender</b></div>
                                 <div className="title"><b>Recipient</b></div>
                                 <div className="title"><b>Amount</b></div>
@@ -177,7 +178,7 @@ class Requests extends React.Component {
                             : <div>No Requests</div>}
                         <RequestList data={this.state.data} />
                     </div>
-                    : <PopUp />}
+                    : <Loading />}
 
                 <br />
             </div>

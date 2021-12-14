@@ -89,7 +89,12 @@ body{
     overflow-y: auto;
 }
 
+.red.box{
+    color: red;
+}
+
 .transactions-field{
+    border-radius: 5px;
     background-color:#14365d93;
     width: 40rem;
     height: auto;
@@ -138,17 +143,29 @@ body{
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-#request.grid{
-    grid-template-columns: 1fr 1fr 1fr;
+.request.grid{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .requestResult{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr;
     margin: center;
 }
 
 .button{
     font-size: 15px;
     box-shadow: 5px 10px 50px rgb(255, 255, 255);
+}
+
+.accept{
+    background-color: white;
+}
+
+.decline{
+    background-color: #ff8888;
+}
+
+.loading{
+    font-size: 30px;
 }
