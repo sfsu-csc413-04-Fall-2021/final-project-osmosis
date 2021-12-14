@@ -169,3 +169,7 @@ body{
 .loading{
     font-size: 30px;
 }
+
+.error{
+    color: red;
+}

@@ -33,7 +33,7 @@ class SignUpResultDto {
         if(error == null || error.length() == 0){
             this.error = error;
         }
-        this.error += error + "; ";
+        this.error += error;
     }
 }
 

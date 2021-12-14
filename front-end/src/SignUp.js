@@ -12,6 +12,29 @@ function SignUp() {
     setCookie(user);
     console.log(getCookie);
     const myHandler = () => {
+
+        var errorMessage = document.getElementById("ErrorMessage");
+
+        if(user == "")
+        {
+            errorMessage.innerHTML = "Please enter a valid username";
+            return false;
+        }
+        else if(password == "")
+        {
+            errorMessage.innerHTML = "Please enter a valid password";
+            return false;
+        }
+        else if(repassword == "")
+        {
+            errorMessage.innerHTML = "Please re-enter your valid password";
+            return false;
+        }
+        else
+        {
+            errorMessage.innerHTML = "";
+        }
+
         var ABC = new RegExp(
             "(?=.*[A-Z])"
         );
@@ -21,29 +44,30 @@ function SignUp() {
 
         if (ABC.test(user)) {
         } else {
-            window.alert("Username has to have an Uppercased letter")
+            errorMessage.innerHTML = "Username has to have an Uppercased letter";
             return false;
         }
         if (user.length <= 6) {
-            window.alert("Username must be more than 6 characters")
+            errorMessage.innerHTML = "Username must be more than 6 characters";
             return false;
 
         } if (ABC.test(password)) {
         } else {
-            window.alert("Password must contain a Uppercase letter.")
+            errorMessage.innerHTML = "Password must contain a Uppercase letter";
             return false;
 
 
         } if (password.length <= 6) {
-            window.alert("Password must be more than 6 characters")
+            errorMessage.innerHTML = "Password must be more than 6 characters";
             return false;
         } if (one.test(password)) {
         } else {
-            window.alert("Password must contain one numeric value")
+            errorMessage.innerHTML = "Password must contain one numeric value";
             return false;
         }
         if (password != repassword) {
-            window.alert("Passwords do not match")
+            errorMessage.innerHTML = "Passwords do not match";
+            //window.alert("Passwords do not match")
             return false;
 
         } else {
@@ -135,6 +159,9 @@ function SignUp() {
                     </input>
                     <br />
                     <br />
+
+                    {/*To display error messages */}
+                    <div className = "error" id = "ErrorMessage"></div>
 
                     <button onClick={myHandler} >Submit</button>
                 </div>

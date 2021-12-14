@@ -14,6 +14,14 @@ function Login() {
   
   const myHandler = () => {
 
+    var errorMessage = document.getElementById("ErrorMessage");
+
+    if(user == "" & password == "")
+    {
+      errorMessage.innerHTML = "Please enter a username and password";
+      return false;
+    }
+
     console.log('Username= ' + user);
     console.log('Password= ' + password);
     const body = {
@@ -36,7 +44,8 @@ function Login() {
           window.location.replace('./Transactions');
         } else {
          // setResult(data.error);
-         window.location.replace('./Login');
+         errorMessage.innerHTML = data.error;
+
         }
       })
       .catch(console.log);
@@ -70,6 +79,9 @@ function Login() {
 
             </input>
             <br />
+
+            {/*To display error messages */}
+            <div className = "error" id = "ErrorMessage"></div>
 
             <button onClick={myHandler} >Enter</button>
           </div>
