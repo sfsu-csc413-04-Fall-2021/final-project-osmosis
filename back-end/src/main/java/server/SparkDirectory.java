@@ -382,6 +382,32 @@ public class SparkDirectory {
             return gson.toJson(transaction.toDocument());
         });
 
+        post("/api/view-private", (req,res) -> { //TODO view private or public transactions
+            System.out.println("View private");
+            String body = req.body();
+            SignUpResultDto result = new SignUpResultDto(true);
+            BasicUser user = gson.fromJson(body, BasicUser.class);
+
+            boolean userExists = UserDao.getInstance().getAll().stream()
+                    .anyMatch(existingUser -> ((BaseUserDto) existingUser).getUsername().equals(user.getUsername()));
+            if(!userExists) {
+                System.out.println("You have been logged out");
+                result.add("You have been logged out");
+                return gson.toJson(result);
+            }
+
+            //found specific user
+            ViewAllResultsDto usernameResults = new ViewAllResultsDto();
+
+
+            for(Object transaction:TransactionDao.getInstance().getPrivate(user.getUsername())) {
+                System.out.println(((UserToUserTransaction) transaction).toDocument());
+                usernameResults.add(((UserToUserTransaction) transaction).toDocument());
+            }
+
+            return gson.toJson(usernameResults);
+        });
+
         post("/api/set-privacy", (req,res) -> { //TODO set privacy of transaction, only for userToUser
             var result = new SignUpResultDto(true);
             return gson.toJson(result);
