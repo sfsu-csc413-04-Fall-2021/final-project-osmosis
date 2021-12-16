@@ -94,14 +94,19 @@ class UserInfo extends React.Component {
     }
 }
 
+function setPrivacy(p){
+    this.state.privacy = p;
+};
+
 class Transactions extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            data: null
-        };
+            data: null,
+            privacy: true
+        };   
     }
 
     componentWillMount() {
@@ -116,7 +121,8 @@ class Transactions extends React.Component {
             method: 'post',
             body: JSON.stringify(body)
         };
-        fetch('api/view-all', settings)
+        console.log(this.state.privacy);
+        fetch((this.state.privacy ? 'api/view-private' : 'api/view-all'), settings)
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({ data: responseJson })
@@ -146,6 +152,10 @@ class Transactions extends React.Component {
                     </div>
                     {this.state.data ? <TransactionsList data={this.state.data} /> : <Loading />}
                     <br />
+                    <div id = "PrivacySwitch">
+                    <button onClick = {() => {this.state.privacy = true; this.renderMyData();}}>Your Transactions</button>
+                    <button onClick= {() => {this.state.privacy = false; this.renderMyData();}}>Global Transactions</button>
+                    </div>
                 </div>
             </div>
         );
